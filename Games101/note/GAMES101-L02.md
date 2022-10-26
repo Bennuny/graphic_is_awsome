@@ -1,4 +1,4 @@
-向量
+### Vector
 
 · 转置(Cartesian Coordinates)  
 · Dot product  
@@ -114,7 +114,20 @@ $$
 
 ***problem.***
 1. dual matrix of vector a?
+2. [cmake使用教程](https://juejin.cn/post/6844903557183832078)
 
 ***推荐学习资源.***
 1. 《线性代数及其应用》
-2. Markdown公式输入：https://www.zybuluo.com/codeep/note/163962
+2. [Markdown公式输入](https://www.zybuluo.com/codeep/note/163962)
+3. [MIT-线性代数-B站](https://www.bilibili.com/video/BV16Z4y1U7oU/?spm_id_from=333.788.recommend_more_video.3)
+
+***tips.***
+1. Windows下cmake使用
+   ```
+    cd project
+    mkdir build
+    cd build
+    cmake ..
+    cmake --build .
+   ```
+
