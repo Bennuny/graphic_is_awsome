@@ -78,6 +78,16 @@ $$
   - Rotates (g cross t) t0 X
   - Diffcult to write!
 
+
+### Perspective Projection
+- Recall: property of homogeneous coordinates
+  - (x, y, z, 1), (kx, ky, kz, k!=0), (xz, yz, zz, z!=0) all represent the same point (x, y, z) in 3D
+  - e.g. (1, 0, 0, 1) and (2, 0, 0, 2) both represent(1, 0, 0)
+
+### What`s near plane`s l, r, b, t then?
+- Sometimes people prefer: vertical field-of-view (fovY) and aspect ratio (assume symmetry i.e. l = -r, b = -t)
+
 ***problem.***
 1. 四元数、欧拉角?
 2. OpenGL使用左手系
+3. 作业0~
