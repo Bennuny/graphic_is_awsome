@@ -120,6 +120,7 @@ $$
 1. 《线性代数及其应用》
 2. [Markdown公式输入](https://www.zybuluo.com/codeep/note/163962)
 3. [MIT-线性代数-B站](https://www.bilibili.com/video/BV16Z4y1U7oU/?spm_id_from=333.788.recommend_more_video.3)
+4. Signal Processing(信号处理)
 
 ***tips.***
 1. Windows下cmake使用
