@@ -30,8 +30,6 @@ Eigen::Matrix4f get_model_matrix(float rotation_angle)
     // 1,0,z,1 -> cosA, sinA, z, 1
     // 0,1,z,1 -> -sinA, cosA, z, 1
 
-
-
     // 1 0 0 0      
     // 0 1 0 0 ->    
     // 0 0 1 0      
@@ -39,10 +37,10 @@ Eigen::Matrix4f get_model_matrix(float rotation_angle)
 
     float pi = std::acos(-1.0);
 
-    model << std::cos(rotation_angle/180.0f*pi), 0, 0, 0, 0, std::sin(rotation_angle/180.0f*pi), 0, 0, 0, 0, 1, 0, 0, 0, 0, 1;
+    model << std::cos(rotation_angle/180.0f*pi), std::sin(rotation_angle/180.0f*pi), 0, 0, -std::sin(rotation_angle/180.0f*pi), std::cos(rotation_angle/180.0f*pi), 0, 0, 0, 0, 1, 0, 0, 0, 0, 1;
 
-    std::cout << "model_matrix" << std::endl;
-    std::cout << model;
+    std::cout << "model_matrix rotate-z: " << rotation_angle << std::endl;
+    std::cout << model << std::endl;
 
     return model;
 }
@@ -76,11 +74,11 @@ Eigen::Matrix4f get_projection_matrix(float eye_fov, float aspect_ratio,
     float r = -l;
 
     std::cout << "top bottom left right near far" << std::endl;
-    std::cout << top << bottom << l << r << top << bottom << std::endl;
+    std::cout << top << bottom << l << r << zNear << zFar << std::endl;
 
     // 2. Orthgraphic-Transformation
     Eigen::Matrix4f otr = Eigen::Matrix4f::Identity();
-    otr << 1, 0, 0, (r+l)/2.0, 0, 1, 0, (b+t)/2.0, 0, 0, 1, (zNear+zFar)/2.0, 0, 0, 0, 1;
+    otr << 1, 0, 0, (r+l)/2.0, 0, 1, 0, (bottom+top)/2.0, 0, 0, 1, (zNear+zFar)/2.0, 0, 0, 0, 1;
 
     std::cout << "orthgraphic 平移" << std::endl;
     std::cout << otr << std::endl;
@@ -88,7 +86,7 @@ Eigen::Matrix4f get_projection_matrix(float eye_fov, float aspect_ratio,
 
     // 3. Orthgrahpic-Scale
     Eigen::Matrix4f osc = Eigen::Matrix4f::Identity();
-    osc << 2.0/(r-l), 0, 0, 0, 0, 2.0/(b-t), 0, 0, 0, 0, 2.0/(zFar-zNear), 0, 0, 0, 0, 1;
+    osc << 2.0/(r-l), 0, 0, 0, 0, 2.0/(bottom-top), 0, 0, 0, 0, 2.0/(zFar-zNear), 0, 0, 0, 0, 1;
 
     std::cout << "orthgraphic 缩放" << std::endl;
     std::cout << osc << std::endl;
