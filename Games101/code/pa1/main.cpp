@@ -45,6 +45,19 @@ Eigen::Matrix4f get_model_matrix(float rotation_angle)
     return model;
 }
 
+// ex
+Eigen::Matrix4f get_rotation(Vector3f axis, float angle)
+{
+    Eigen::Matrix4f model = Eigen::Matrix4f::Identity();
+
+    // TODO: Implement this function
+    // Create the model matrix for rotating the triangle around the Z axis.
+    // Then return it.
+
+
+    return model;z
+}
+
 Eigen::Matrix4f get_projection_matrix(float eye_fov, float aspect_ratio,
                                       float zNear, float zFar)
 {
