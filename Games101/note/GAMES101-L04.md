@@ -50,10 +50,17 @@ $$
 ### Compose any 3D rotation from R_x, R_y, R_z
 $$
 R_{xyz}(\alpha\theta\gamma) = R_{x}(\alpha)R_{y}(\theta)R_{z}(\gamma)
+\begin{pmatrix}
+0 & -n_z & n_y\\
+n_z & 0 & -n_x\\
+-n_y & n_x & 0\\   
+\end{pmatrix}
 $$
 
 ### Rodrigues` Rotation Formula
-
+$$
+R(n,\alpha) = \cos(\alpha)I + (1-cos(\alpha))nn^T + sin(\alpha)
+$$
 ### View / Camera Transformation
 -  What is view transformation?
 -  Think about how to take a photo
