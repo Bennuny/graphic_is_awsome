@@ -154,7 +154,7 @@ $$
 v为待旋转向量，k为旋转轴。
 
 $$
-v_{rot} = \cos\theta v + (1-\cos\theta)(v \cdot k)k + \sin\theta k \times v
+v_{rot} = \cos\theta v + (1-\cos\theta)(v \cdot k)k + \sin\theta (k \times v)
 $$
 其中, \theta 为旋转角度，v为待旋转向量，k为旋转向量（单位向量），v_rot为旋转后的向量  
 

@@ -59,7 +59,7 @@ $$
 
 ### Rodrigues` Rotation Formula
 $$
-R(n,\alpha) = \cos(\alpha)I + (1-cos(\alpha))nn^T + sin(\alpha)
+R(n,\alpha) = \cos(\alpha)I + (1-cos(\alpha))nn^T + sin(\alpha)N
 $$
 ### View / Camera Transformation
 -  What is view transformation?
