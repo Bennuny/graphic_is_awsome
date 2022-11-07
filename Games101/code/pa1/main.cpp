@@ -59,6 +59,8 @@ Eigen::Matrix4f get_rotation(Vector3f axis, float angle)
     // Create the model matrix for rotating the triangle around the Z axis.
     // Then return it.
 
+    // ！！！向量写成矩阵的形式
+
     // 罗德里格公式
     float pi = std::acos(-1);
     float cos_v = std::cos(angle/180.0*pi);
