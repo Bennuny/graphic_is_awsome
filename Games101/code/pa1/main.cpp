@@ -50,13 +50,38 @@ Eigen::Matrix4f get_rotation(Vector3f axis, float angle)
 {
     Eigen::Matrix4f model = Eigen::Matrix4f::Identity();
 
+    // $$
+    // v_{rot} = \cos\theta v + (1-\cos\theta)(v \cdot k)k + \sin\theta k \times v
+    // $$
+    // 其中, \theta 为旋转角度，v为待旋转向量，k为旋转向量（单位向量），v_rot为旋转后的向量  
+
     // TODO: Implement this function
     // Create the model matrix for rotating the triangle around the Z axis.
     // Then return it.
 
-    
+    // 罗德里格公式
+    float pi = std::acos(-1);
+    float cos_v = std::cos(angle/180.0*pi);
+    float sin_v = std::sin(angle/180.0*pi);
 
-    return model;z
+    float nx = axis[0];
+    float ny = axis[1];
+    float nz = axis[2];
+
+    Eigen::Matrix3f N;
+    N << 0, -nz, ny, nz, 0, -nx, -ny, nx, 0;
+
+    Eigen::Matrix3f I = Eigen::Matrix3f::Identity();
+
+    Eigen::Matrix3f R = cos_v * I + (1-cos_v) * axis * axis.transpose() + sin_v * N;
+
+    model << 
+        R(0, 0), R(0, 1), R(0, 2), 0,
+        R(1, 0), R(1, 1), R(1, 2), 0,
+        R(2, 0), R(2, 1), R(2, 2), 0,
+        0, 0, 0, 1.0;
+
+    return model;
 }
 
 Eigen::Matrix4f get_projection_matrix(float eye_fov, float aspect_ratio,
@@ -166,7 +191,12 @@ int main(int argc, const char** argv)
     while (key != 27) {
         r.clear(rst::Buffers::Color | rst::Buffers::Depth);
 
-        r.set_model(get_model_matrix(angle));
+        // r.set_model(get_model_matrix(angle));
+
+        Eigen::Vector3f axis;
+        axis << 0, 2.0, -2.0;
+        r.set_model(get_rotation(axis, angle));
+        
         r.set_view(get_view_matrix(eye_pos));
         r.set_projection(get_projection_matrix(45, 1, 0.1, 50));
 
