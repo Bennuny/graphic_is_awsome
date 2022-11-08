@@ -30,8 +30,57 @@ Eigen::Matrix4f get_model_matrix(float rotation_angle)
 
 Eigen::Matrix4f get_projection_matrix(float eye_fov, float aspect_ratio, float zNear, float zFar)
 {
-    // TODO: Copy-paste your implementation from the previous assignment.
-    Eigen::Matrix4f projection;
+    // Students will implement this function
+
+    Eigen::Matrix4f projection = Eigen::Matrix4f::Identity();
+
+    // std::cout << "get_projection_matrix" << std::endl;
+
+    // 1. Mprojection-orthgraphic
+    Eigen::Matrix4f mpo = Eigen::Matrix4f::Identity();
+    mpo << zNear, 0, 0, 0, 0, zNear, 0, 0, 0, 0, zNear + zFar, -zNear * zFar, 0, 0, 1, 0;
+
+    // std::cout << "projection 挤压" << std::endl;
+    // std::cout << mpo << std::endl;
+
+    float pi = std::acos(-1.0);
+    float tfov = std::tan(eye_fov/2.0/180.0*pi);
+    // tfov = t / zNear;
+
+    float top = -zNear * tfov;
+    float bottom = -top;
+
+    // aspect_ratio = width / height
+    float width = aspect_ratio * (bottom - top);
+    float l = -(width/2.0);
+    float r = -l;
+
+    // std::cout << "top bottom left right near far" << std::endl;
+    // std::cout << top << bottom << l << r << zNear << zFar << std::endl;
+
+    // 2. Orthgraphic-Transformation
+    Eigen::Matrix4f otr = Eigen::Matrix4f::Identity();
+    otr << 1, 0, 0, (r+l)/2.0, 0, 1, 0, (bottom+top)/2.0, 0, 0, 1, (zNear+zFar)/2.0, 0, 0, 0, 1;
+
+    // std::cout << "orthgraphic 平移" << std::endl;
+    // std::cout << otr << std::endl;
+
+
+    // 3. Orthgrahpic-Scale
+    Eigen::Matrix4f osc = Eigen::Matrix4f::Identity();
+    osc << 2.0/(r-l), 0, 0, 0, 0, 2.0/(bottom-top), 0, 0, 0, 0, 2.0/(zFar-zNear), 0, 0, 0, 0, 1;
+
+    // std::cout << "orthgraphic 缩放" << std::endl;
+    // std::cout << osc << std::endl;
+
+    projection = osc * otr * mpo;
+
+    // std::cout << "projection" << std::endl;
+    // std::cout << projection << std::endl;
+
+    // TODO: Implement this function
+    // Create the projection matrix for the given parameters.
+    // Then return it.
 
     return projection;
 }
@@ -95,6 +144,7 @@ int main(int argc, const char** argv)
         r.set_projection(get_projection_matrix(45, 1, 0.1, 50));
 
         r.draw(pos_id, ind_id, col_id, rst::Primitive::Triangle);
+
         cv::Mat image(700, 700, CV_32FC3, r.frame_buffer().data());
         image.convertTo(image, CV_8UC3, 1.0f);
         cv::cvtColor(image, image, cv::COLOR_RGB2BGR);
