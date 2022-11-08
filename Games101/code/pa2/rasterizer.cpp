@@ -40,16 +40,29 @@ auto to_vec4(const Eigen::Vector3f& v3, float w = 1.0f)
 }
 
 
-static bool insideTriangle(int x, int y, const Vector3f* _v)
+static bool insideTriangle(float x, float y, const Vector3f* _v)
 {   
     // TODO : Implement this function to check if the point (x, y) is inside the triangle represented by _v[0], _v[1], _v[2]
-    bool inside = true;
 
-    // Eigen::Vector2f _ab = (_v[1][0] - _v[0][0], _v[1][1] - _v[0][1]);
-    // Eigen::Vector2f _ap = (x - _v[0][0], y - _v[0][1]);
-    // Eigen::Vector2f::cross(_ab, _ap)
+    bool in = false;
 
-    return inside;
+    Eigen::Vector3f p(x, y, 1.0f);
+
+    Eigen::Vector3f AB = _v[1] - _v[0];
+    Eigen::Vector3f BC = _v[2] - _v[1];
+    Eigen::Vector3f CA = _v[0] - _v[2];
+
+    Eigen::Vector3f AP = p - _v[0];
+    Eigen::Vector3f BP = p - _v[1];
+    Eigen::Vector3f CP = p - _v[2];
+
+    float za = AB.cross(AP).z();
+    float zb = BC.cross(BP).z();
+    float zc = CA.cross(CP).z();
+
+    in = (za > 0 && zb > 0 && zc > 0) || (za < 0 && zb < 0 && zc < 0);
+
+    return in;
 }
 
 static std::tuple<float, float, float> computeBarycentric2D(float x, float y, const Vector3f* v)
@@ -128,14 +141,6 @@ void rst::rasterizer::rasterize_triangle(const Triangle& t) {
     }
     // std::cout << minx << ", " << maxx << ", "<< miny << "," << maxy << std::endl;
 
-    // triangles
-    std::vector<Eigen::Vector3f> triangle_point
-            {
-                    {v[0][0], v[0][1], v[0][2]},
-                    {v[1][0], v[1][1], v[1][2]},
-                    {v[2][0], v[2][1], v[2][2]},
-            };    
-
     // TODO : Find out the bounding box of current triangle.
     // iterate through the pixel and find if the current pixel is inside the triangle
 
@@ -143,10 +148,23 @@ void rst::rasterizer::rasterize_triangle(const Triangle& t) {
     {
         for (int py = miny; py <= maxy; py += 1.f)
         {
-            // bool isInside = insideTriangle(px, py, triangle_point)
-            // std::cout << "inside? " << px << ", " << py << ", " << isInside << std::endl;
+            bool inTriangle = insideTriangle(static_cast<float>(px+0.5), static_cast<float>(py+0.5), t.v);
 
-            set_pixel(Eigen::Vector3f(px, py, v[0][2]), t.getColor());
+            if (inTriangle)
+            {
+                auto [alpha, beta, gamma] = computeBarycentric2D(px, py, t.v);
+                float w_reciprocal = 1.0/(alpha / v[0].w() + beta / v[1].w() + gamma / v[2].w());
+                float z_interpolated = alpha * v[0].z() / v[0].w() + beta * v[1].z() / v[1].w() + gamma * v[2].z() / v[2].w();
+                z_interpolated *= w_reciprocal;
+                // 越大离视点越远
+
+                float idx = get_index(px, py);
+                if (z_interpolated < depth_buf[idx]) 
+                {
+                    depth_buf[idx] = z_interpolated;
+                    set_pixel(Eigen::Vector3f(static_cast<float>(px), static_cast<float>(py), z_interpolated), t.getColor());
+                }
+            }
         }
     }
 
