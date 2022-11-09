@@ -265,8 +265,8 @@ void rst::rasterizer::clear(rst::Buffers buff)
 
 rst::rasterizer::rasterizer(int w, int h) : width(w), height(h)
 {
-    msaa_w = 2;
-    msaa_h = 2;
+    msaa_w = 4;
+    msaa_h = 4;
 
     frame_buf.resize(w * h);
     depth_buf.resize(w * h * msaa_w * msaa_h);
