@@ -23,3 +23,24 @@ static bool insideTriangle(int x, int y, const Vector4f* _v){
 }
 
 ```
+
+1. get_view_matrix(Vector3f eye_pos). 将观察点，摄像机位置移到原点；
+2. get_model_matrix(float angle). 模型变换，模型进行，缩放，旋转（罗德里戈斯，绕任意轴旋转公式），平移；
+3. get_projection_matrix(float eye_fov, aspect_ratio, zNear, zFar). 根据zNear, zFar 计算挤压矩阵Mperp-orth, 计算正交投影，将坐标映射到[-1, 1]范围内；
+
+- vertex_shader
+
+- normal_fragment_shader
+
+- texture_fragment_shader
+
+- phong_fragment_shader
+
+- displacement_fragment_shader
+
+- bump_fragment_shader
+
+
+- reflect
+
+

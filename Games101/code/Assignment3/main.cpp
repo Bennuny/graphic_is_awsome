@@ -356,7 +356,7 @@ int main(int argc, const char** argv)
 {
     std::vector<Triangle*> TriangleList;
 
-    float angle = 140.0;
+    float angle = 20.0;
     bool command_line = false;
 
     std::string filename = "output.png";
@@ -379,12 +379,15 @@ int main(int argc, const char** argv)
             TriangleList.push_back(t);
         }
     }
+    // 获取需要的绘制信息：定点坐标、法线，纹理坐标。每个定点对应
 
+    // 绘制大小
     rst::rasterizer r(700, 700);
 
     auto texture_path = "hmap.jpg";
     r.set_texture(Texture(obj_path + texture_path));
 
+    // 默认使用的是 phong 片段着色器
     std::function<Eigen::Vector3f(fragment_shader_payload)> active_shader = phong_fragment_shader;
 
     if (argc >= 2)
@@ -421,6 +424,7 @@ int main(int argc, const char** argv)
         }
     }
 
+    // 观察点的位置
     Eigen::Vector3f eye_pos = {0,0,10};
 
     r.set_vertex_shader(vertex_shader);
@@ -476,75 +480,3 @@ int main(int argc, const char** argv)
     }
     return 0;
 }
-
-
-
-// Eigen::Vector3f displacement_fragment_shader(const fragment_shader_payload& payload)
-// {
-//     Eigen::Vector3f ka = Eigen::Vector3f(0.005, 0.005, 0.005);
-//     Eigen::Vector3f kd = payload.color;
-//     Eigen::Vector3f ks = Eigen::Vector3f(0.7937, 0.7937, 0.7937);
-
-//     auto l1 = light{{20, 20, 20}, {500, 500, 500}};
-//     auto l2 = light{{-20, 20, 0}, {500, 500, 500}};
-
-//     std::vector<light> lights = {l1, l2};
-//     Eigen::Vector3f amb_light_intensity{10, 10, 10};
-//     Eigen::Vector3f eye_pos{0, 0, 10};
-
-//     float p = 150;
-
-//     Eigen::Vector3f color = payload.color; 
-//     Eigen::Vector3f point = payload.view_pos;
-//     Eigen::Vector3f n = payload.normal;
-
-//     float kh = 0.2, kn = 0.1;
-    
-//     // TODO: Implement displacement mapping here
-//     // Let n = normal = (x, y, z)
-//     // Vector t = (x*y/sqrt(x*x+z*z),sqrt(x*x+z*z),z*y/sqrt(x*x+z*z))
-//     // Vector b = n cross product t
-//     // Matrix TBN = [t b n]
-//     // dU = kh * kn * (h(u+1/w,v)-h(u,v))
-//     // dV = kh * kn * (h(u,v+1/h)-h(u,v))
-//     // Vector ln = (-dU, -dV, 1)
-//     // Position p = p + kn * n * h(u,v)
-//     // Normal n = normalize(TBN * ln)
-
-//     float x = n.x(), y = n.y(), z = n.z();
-//     float u = payload.tex_coords.x(), v = payload.tex_coords.y();
-//     int w = payload.texture->width, h = payload.texture->height;
-
-//     Eigen::Vector3f t(x*y/std::sqrt(x*x+z*z),std::sqrt(x*x+z*z),z*y/std::sqrt(x*x+z*z));
-//     Eigen::Vector3f b = n.cross(t);
-//     Eigen::Matrix3f TBN;
-//     TBN << t, b, n;
-
-//     auto dU = kh * kn * (payload.texture->getColor(u+1.f/w,v).norm()-payload.texture->getColor(u,v).norm());
-//     auto dV = kh * kn * (payload.texture->getColor(u,v+1.f/h).norm()-payload.texture->getColor(u,v).norm());
-//     Eigen::Vector3f ln(-dU, -dV, 1.f);
-    
-//     point = point + kn * n * payload.texture->getColor(u,v).norm();
-//     n = (TBN * ln).normalized();
-
-//     Eigen::Vector3f result_color = {0, 0, 0};
-//     for (auto& light : lights)
-//     {
-//         // TODO: For each light source in the code, calculate what the *ambient*, *diffuse*, and *specular* 
-//         // components are. Then, accumulate that result on the *result_color* object.
-
-//         Eigen::Vector3f l = (light.position - point).normalized();
-//         Eigen::Vector3f v = (eye_pos - point).normalized();
-//         Eigen::Vector3f h = (v + l).normalized();
-//         float r2 = std::pow((light.position - point).norm(), 2.0);
-
-//         // NOTE: use cwiseProduct() because ka/kd/ks are coefficients
-//         Eigen::Vector3f ambient = ka.cwiseProduct(amb_light_intensity);
-//         Eigen::Vector3f diffuse = kd.cwiseProduct(light.intensity/r2)*std::max(0.f, n.dot(l));
-//         Eigen::Vector3f specular = ks.cwiseProduct(light.intensity/r2)*std::pow(std::max(0.f, n.dot(h)), p);
-
-//         result_color += (ambient + diffuse + specular);
-//     }
-
-//     return result_color * 255.f;
-// }
