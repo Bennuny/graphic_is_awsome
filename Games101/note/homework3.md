@@ -29,8 +29,7 @@ static bool insideTriangle(int x, int y, const Vector4f* _v){
 3. get_projection_matrix(float eye_fov, aspect_ratio, zNear, zFar). 根据zNear, zFar 计算挤压矩阵Mperp-orth, 计算正交投影，将坐标映射到[-1, 1]范围内；
 
 - vertex_shader
-
-- normal_fragment_shader
+- normal_fragment_shader: 法线-fragment
 
 - texture_fragment_shader
 
@@ -40,7 +39,11 @@ static bool insideTriangle(int x, int y, const Vector4f* _v){
 
 - bump_fragment_shader
 
-
 - reflect
 
 
+### key function
+- insideTriangle
+- rasterizer(Bresenham's line drawing algorithm)
+- computeBarycentric2D
+- interpolate 线性插值
