@@ -94,7 +94,6 @@ void bezier(const std::vector<cv::Point2f> &control_points, cv::Mat &window)
             float l = sqrt(d.x*d.x + d.y*d.y);
             float percent = len / l;
 
-
             cv::Vec3d color = window.at<cv::Vec3b>(p.y, p.x);
 
             color[1] = std::max(color[1], (double)255*percent);
