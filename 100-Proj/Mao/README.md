@@ -5,8 +5,8 @@
 
 ### Dependent Package 
 1. Universal RP
-2. Polybrush
-3. ProBuilder
+2. Polybrush（导入是需要导入URP依赖）
+3. ProBuilder（导入是需要导入URP依赖）
 4. progrids [com.unity.progrids]
 
 ### Dependent My Asset
