@@ -18,5 +18,6 @@
 ### Project Setting
 1. Enable Preview Packages [Project Settings -> Package Manager];
 2. 创建URP渲染管线：Create->Rendering->Universal Render Pipeline -> Pipeline Asset (Forward Render)
-3. Project Settings -> Graphics -> Scriptable Render Pipeline Settings
-4. Project Settings -> Quality -> Rendering
+3. 渲染管线设置：Project Settings -> Graphics -> Scriptable Render Pipeline Settings
+4. 渲染管线设置：Project Settings -> Quality -> Rendering
+5. 天空盒设置：Window -> Rendering -> Lighting -> Environment -> SkyBox Material
