@@ -59,7 +59,7 @@ public class MouseManager : MonoBehaviour
 
     private void MouseControl()
     {
-        if (Input.GetMouseButton(0) && _hitinfo.collider.gameObject != null)
+        if (Input.GetMouseButton(0) && _hitinfo.collider != null && _hitinfo.collider.gameObject != null)
         {
             if (_hitinfo.collider.gameObject.CompareTag("Ground"))
             {
