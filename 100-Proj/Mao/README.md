@@ -21,3 +21,4 @@
 3. 渲染管线设置：Project Settings -> Graphics -> Scriptable Render Pipeline Settings
 4. 渲染管线设置：Project Settings -> Quality -> Rendering
 5. 天空盒设置：Window -> Rendering -> Lighting -> Environment -> SkyBox Material
+
