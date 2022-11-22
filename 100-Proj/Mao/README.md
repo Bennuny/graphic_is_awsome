@@ -8,6 +8,7 @@
 2. Polybrush（导入是需要导入URP依赖）
 3. ProBuilder（导入是需要导入URP依赖）
 4. progrids [com.unity.progrids]
+5. Cinemachine
 
 ### Dependent My Asset
 1. Dog Knight PBR Polyart
