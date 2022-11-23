@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Polybrush_Universal Render Pipeline_Lit Vertex Color URP
-  m_Shader: {fileID: -6465566751694194690, guid: 58f77a5b5b5fdf0439bb3d7045541cbc, type: 3}
+  m_Name: Shader Graphs_OcclusionShader
+  m_Shader: {fileID: -6465566751694194690, guid: 7d85c642400e24df282f7c76d2cbb382, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -19,10 +19,6 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _AlbedoTexture:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -36,7 +32,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Gloss: 0.5
-    - _Metallic: 0
-    m_Colors: []
+    - Vector1_c9a3e202a0c341929986453d61af7f7c: 0.67
+    - Vector1_d8bffd297e51433f91701a4ff8a00150: 0.37
+    m_Colors:
+    - Color_178134c65db54523a958e5b5321d9a0f: {r: 0.72104, g: 0.9245283, b: 0.36196148, a: 0}
   m_BuildTextureStacks: []

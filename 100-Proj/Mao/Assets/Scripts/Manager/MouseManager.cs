@@ -17,6 +17,8 @@ public class MouseManager : MonoBehaviour
 
     public event Action<Vector3> OnMouseClicked;
 
+    public event Action<GameObject> OnEnemyClicked;
+
     private void Awake()
     {
         if (Instance != null)
@@ -52,6 +54,11 @@ public class MouseManager : MonoBehaviour
                         Cursor.SetCursor(Target, new Vector2(16, 16), CursorMode.Auto);
                     }
                     break;
+                case "Enemy":
+                    {
+                        Cursor.SetCursor(Attack, new Vector2(16, 16), CursorMode.Auto);
+                    }
+                    break;
             }
 
         }
@@ -64,6 +71,10 @@ public class MouseManager : MonoBehaviour
             if (_hitinfo.collider.gameObject.CompareTag("Ground"))
             {
                 OnMouseClicked?.Invoke(_hitinfo.point);
+            }
+            else if (_hitinfo.collider.gameObject.CompareTag("Enemy"))
+            {
+                OnEnemyClicked?.Invoke(_hitinfo.collider.gameObject);
             }
         }
     }
