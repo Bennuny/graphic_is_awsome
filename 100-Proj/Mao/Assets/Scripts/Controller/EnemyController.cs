@@ -17,15 +17,33 @@ public class EnemyController : MonoBehaviour
 {
     private NavMeshAgent _agent;
 
-    public EnemyState _enemyState;
+    private EnemyState _enemyState;
+
+    private GameObject _player;
+
+
+    [Header("Basic Setting")]
+
+    public float SightRadius;
 
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
     }
 
+    private void Update()
+    {
+        SwitchState();
+    }
+
     private void SwitchState()
     {
+        if (FoundPlayer())
+        {
+            _enemyState = EnemyState.CHASE;
+            Debug.Log("Found Player");
+        }
+
         switch (_enemyState)
         {
             case EnemyState.GUARD:
@@ -50,5 +68,22 @@ public class EnemyController : MonoBehaviour
                 break;
 
         }
+    }
+
+    private bool FoundPlayer()
+    {
+        var colliders = Physics.OverlapSphere(transform.position, SightRadius);
+
+        foreach (var collider in colliders)
+        {
+            if (collider.gameObject.CompareTag("Player"))
+            {
+                _player = collider.gameObject;
+
+                return true;
+            }
+        }
+
+        return false;
     }
 }
