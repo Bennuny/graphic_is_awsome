@@ -146,6 +146,7 @@ public class EnemyController : MonoBehaviour
                     }
                     else
                     {
+                        _agent.isStopped = false;
                         _isFollow = false;
                         if (_remainLookAtTime > 0)
                         {
@@ -197,15 +198,16 @@ public class EnemyController : MonoBehaviour
     {
         transform.LookAt(_attackTarget.transform.position);
 
+        _animator.SetTrigger("Attack");
 
-        if (TargetInAttackRange())
-        {
-            _animator.SetTrigger("Attack");
-        }
-        else if (TargetInSkillRange())
-        {
-            _animator.SetTrigger("Skill");
-        }
+        //if (TargetInAttackRange())
+        //{
+        //    _animator.SetTrigger("Attack");
+        //}
+        //else if (TargetInSkillRange())
+        //{
+        //    _animator.SetTrigger("Attack");
+        //}
     }
 
     bool TargetInAttackRange()
@@ -237,6 +239,7 @@ public class EnemyController : MonoBehaviour
         _animator.SetBool("Walk", _isWalk);
         _animator.SetBool("Chase", _isChase);
         _animator.SetBool("Follow", _isFollow);
+        _animator.SetBool("Critical", _characterStat.isCritical);
     }
 
     private bool FoundPlayer()
