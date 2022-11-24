@@ -103,7 +103,7 @@ public class EnemyController : MonoBehaviour
                     _isChase = false;
                     _agent.speed = _speed * 0.5f;
 
-                    if (Vector3.Distance(_wayPoint, transform.position) < _agent.stoppingDistance)
+                    if (Vector3.Distance(_wayPoint, transform.position) <= _agent.stoppingDistance)
                     {
                         _isWalk = false;
 
@@ -131,10 +131,15 @@ public class EnemyController : MonoBehaviour
                     if (foundPlayer)
                     {
                         _isFollow = true;
+                        _agent.destination = _attackTarget.transform.position;
+                    }
+                    else
+                    {
+                        _isFollow = false;
                         if (_remainLookAtTime > 0)
                         {
-                            _agent.destination = _attackTarget.transform.position;
                             _remainLookAtTime -= Time.deltaTime;
+                            _agent.destination = transform.position;
                         }
                         else
                         {
@@ -147,11 +152,6 @@ public class EnemyController : MonoBehaviour
                                 _enemyState = EnemyState.PATROL;
                             }
                         }
-                    }
-                    else
-                    {
-                        _isFollow = false;
-                        _agent.destination = transform.position;
                     }
                 }
                 break;
@@ -199,6 +199,7 @@ public class EnemyController : MonoBehaviour
 
         // FIX
         NavMeshHit hit;
+        // SamplePosition: 指定范围内，找到导航导航网格上最近的点。对导航网格进行采样
         _wayPoint = NavMesh.SamplePosition(randomPoint, out hit, PatrolRange, 1) ? hit.position : transform.position;
     }
 
