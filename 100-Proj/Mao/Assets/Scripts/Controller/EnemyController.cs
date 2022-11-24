@@ -23,6 +23,8 @@ public class EnemyController : MonoBehaviour
 
     private Animator _animator;
 
+    private CharacterStat _characterStat;
+
 
     [Header("Basic Setting")]
 
@@ -55,11 +57,15 @@ public class EnemyController : MonoBehaviour
 
         _animator = GetComponent<Animator>();
 
+        _characterStat = GetComponent<CharacterStat>();
+
         _speed = _agent.speed;
 
         _guidePos = transform.position;
 
         _remainLookAtTime = LookAtTime;
+
+        _characterStat.MaxHealth = 2;
     }
 
     private void Start()

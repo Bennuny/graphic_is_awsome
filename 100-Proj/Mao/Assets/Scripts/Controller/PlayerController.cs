@@ -14,11 +14,15 @@ public class PlayerController : MonoBehaviour
 
     private float _lastAttackTime;
 
+    private CharacterStat _characterStat;
+
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
 
         _animator = GetComponent<Animator>();
+
+        _characterStat = GetComponent<CharacterStat>();
     }
 
 
