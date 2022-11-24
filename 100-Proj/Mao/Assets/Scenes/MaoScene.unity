@@ -15255,6 +15255,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterData: {fileID: 11400000, guid: 58b2f4710b5e34cc48508e90257be87f, type: 2}
+  combat: {fileID: 11400000, guid: bc4a0bac6741440a08b78a7a6b093cf2, type: 2}
+  isCritical: 0
 --- !u!1001 &1083088886
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16195,7 +16197,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh301408
+  m_Name: pb_Mesh22646
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -18632,7 +18634,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1474545051}
-  m_LocalRotation: {x: 0.18785325, y: -0.3784236, z: 0.07872922, w: 0.9029443}
+  m_LocalRotation: {x: 0.18785323, y: -0.37842363, z: 0.07872922, w: 0.9029443}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -81221,3 +81223,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterData: {fileID: 11400000, guid: cb6534292fa4a47cda0343db3d713473, type: 2}
+  combat: {fileID: 11400000, guid: f59bd9db02e0d41939ef0171340001f8, type: 2}
+  isCritical: 0

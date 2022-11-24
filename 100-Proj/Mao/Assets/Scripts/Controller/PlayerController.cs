@@ -55,8 +55,7 @@ public class PlayerController : MonoBehaviour
         _agent.isStopped = false;
         transform.LookAt(_attackTarget.transform);
 
-        // TODO: attack range
-        while (Vector3.Distance(_attackTarget.transform.position, transform.position) > 1)
+        while (Vector3.Distance(_attackTarget.transform.position, transform.position) > _characterStat.AttackRange)
         {
             _agent.destination = _attackTarget.transform.position;
             yield return null;

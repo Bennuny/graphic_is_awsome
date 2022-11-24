@@ -35,7 +35,10 @@ public class EnemyController : MonoBehaviour
     private float _speed;
 
     public float LookAtTime;
+
     private float _remainLookAtTime;
+
+    private float _lastAttackTime;
 
     //
     bool _isWalk;
@@ -65,7 +68,7 @@ public class EnemyController : MonoBehaviour
 
         _remainLookAtTime = LookAtTime;
 
-        _characterStat.MaxHealth = 2;
+        //_characterStat.MaxHealth = 2;
     }
 
     private void Start()
@@ -86,6 +89,8 @@ public class EnemyController : MonoBehaviour
         SwitchState();
 
         SwitchAnimation();
+
+        _lastAttackTime -= Time.deltaTime;
     }
 
     private void SwitchState()
@@ -159,6 +164,24 @@ public class EnemyController : MonoBehaviour
                             }
                         }
                     }
+
+                    if (TargetInAttackRange() || TargetInSkillRange())
+                    {
+                        _isFollow = false;
+                        _agent.isStopped = true;
+
+                        if (_lastAttackTime < 0)
+                        {
+                            _lastAttackTime = _characterStat.CoolDown;
+
+                            // critical attack
+                            _characterStat.isCritical = Random.value < _characterStat.CriticalChance;
+                            // attack
+
+                            Attack();
+
+                        }
+                    }
                 }
                 break;
             case EnemyState.DEAD:
@@ -168,6 +191,45 @@ public class EnemyController : MonoBehaviour
                 break;
 
         }
+    }
+
+    void Attack()
+    {
+        transform.LookAt(_attackTarget.transform.position);
+
+
+        if (TargetInAttackRange())
+        {
+            _animator.SetTrigger("Attack");
+        }
+        else if (TargetInSkillRange())
+        {
+            _animator.SetTrigger("Skill");
+        }
+    }
+
+    bool TargetInAttackRange()
+    {
+        if (_attackTarget)
+        {
+            var inRange = Vector3.Distance(transform.position, _attackTarget.transform.position) <= _characterStat.AttackRange;
+
+            return inRange;
+        }
+
+        return false;
+    }
+
+    bool TargetInSkillRange()
+    {
+        if (!_attackTarget)
+        {
+            return false;
+        }
+
+        var inRange = Vector3.Distance(transform.position, _attackTarget.transform.position) <= _characterStat.SkillRange;
+
+        return inRange;
     }
 
     private void SwitchAnimation()
