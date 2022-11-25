@@ -34,9 +34,19 @@ public class PlayerController : MonoBehaviour
     {
         _isDead = _characterStat.CurrentHealth == 0;
 
-        SwitchAnimation();
+        if (_isDead)
+        {
+            GameManager.Instance.NotifiyObserver();
+            // Death
+            SwitchAnimation();
+        }
+        else
+        {
+            // Death
+            SwitchAnimation();
 
-        _lastAttackTime -= Time.deltaTime;
+            _lastAttackTime -= Time.deltaTime;
+        }
     }
 
     private void Start()
@@ -85,6 +95,7 @@ public class PlayerController : MonoBehaviour
     private void SwitchAnimation()
     {
         _animator.SetFloat("Speed", _agent.velocity.sqrMagnitude);
+        _animator.SetBool("Death", _isDead);
     }
 
     public void MoveToTarget(Vector3 target)

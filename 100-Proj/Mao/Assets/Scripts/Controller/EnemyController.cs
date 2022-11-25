@@ -13,7 +13,7 @@ public enum EnemyState
 
 [RequireComponent(typeof(NavMeshAgent))]
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : MonoBehaviour, IEndGameObserver
 {
     private NavMeshAgent _agent;
 
@@ -51,6 +51,8 @@ public class EnemyController : MonoBehaviour
 
     bool _isDead;
 
+    bool _playerDead;
+
     [Header("Patrol Setting")]
     public float PatrolRange;
 
@@ -78,11 +80,15 @@ public class EnemyController : MonoBehaviour
 
         _remainLookAtTime = LookAtTime;
 
+        _playerDead = false;
+
         //_characterStat.MaxHealth = 2;
     }
 
     private void Start()
     {
+        GameManager.Instance.AddObserver(this);
+
         if (isGuard)
         {
             _enemyState = EnemyState.GUARD;
@@ -94,15 +100,28 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    void OnEnable()
+    {
+        //GameManager.Instance.AddObserver(this);
+    }
+
+    void OnDisable()
+    {
+        //GameManager.Instance.RemoveObserver(this);
+    }
+
     private void Update()
     {
         _isDead = _characterStat.CurrentHealth == 0;
 
-        SwitchState();
+        if (!_playerDead)
+        {
+            SwitchState();
 
-        SwitchAnimation();
+            SwitchAnimation();
 
-        _lastAttackTime -= Time.deltaTime;
+            _lastAttackTime -= Time.deltaTime;
+        }
     }
 
     private void SwitchState()
@@ -325,5 +344,20 @@ public class EnemyController : MonoBehaviour
 
             attackStat.TakeDamage(_characterStat, attackStat);
         }
+    }
+
+    public void EndNotifiy()
+    {
+        // play win animation
+        _isChase = false;
+        _isWalk = false;
+
+        _attackTarget = null;
+        _animator.SetBool("Win", true);
+
+        _playerDead = true;
+
+        // stop move
+        // stop agent
     }
 }

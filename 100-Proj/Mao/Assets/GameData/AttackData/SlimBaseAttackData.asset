@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc84fa29dee724ea692bb1f54d5d820a, type: 3}
   m_Name: SlimBaseAttackData
   m_EditorClassIdentifier: 
-  AttackRange: 1
+  AttackRange: 2
   SkillRange: 0
   CoolDown: 1
-  MinDamage: 2
-  MaxDamage: 4
+  MinDamage: 4
+  MaxDamage: 6
   CriticalMultiplier: 2
   CriticalChance: 0.1
