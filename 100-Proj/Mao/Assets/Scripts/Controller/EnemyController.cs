@@ -25,6 +25,8 @@ public class EnemyController : MonoBehaviour
 
     private CharacterStat _characterStat;
 
+    private Collider _coll;
+
 
     [Header("Basic Setting")]
 
@@ -47,12 +49,16 @@ public class EnemyController : MonoBehaviour
 
     bool _isFollow;
 
+    bool _isDead;
+
     [Header("Patrol Setting")]
     public float PatrolRange;
 
     private Vector3 _wayPoint;
 
-    private Vector3 _guidePos;
+    private Vector3 _guardPos;
+
+    private Quaternion _guardRotation;
 
     private void Awake()
     {
@@ -62,9 +68,13 @@ public class EnemyController : MonoBehaviour
 
         _characterStat = GetComponent<CharacterStat>();
 
+        _coll = GetComponent<BoxCollider>();
+
         _speed = _agent.speed;
 
-        _guidePos = transform.position;
+        _guardPos = transform.position;
+
+        _guardRotation = transform.rotation;
 
         _remainLookAtTime = LookAtTime;
 
@@ -86,6 +96,8 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
+        _isDead = _characterStat.CurrentHealth == 0;
+
         SwitchState();
 
         SwitchAnimation();
@@ -95,18 +107,37 @@ public class EnemyController : MonoBehaviour
 
     private void SwitchState()
     {
-        bool foundPlayer = FoundPlayer();
 
-        if (foundPlayer)
+        bool foundPlayer = false;
+        if (_isDead)
         {
-            _enemyState = EnemyState.CHASE;
+            _enemyState = EnemyState.DEAD;
+        }
+        else
+        {
+            foundPlayer = FoundPlayer();
+            if (foundPlayer)
+            {
+                _enemyState = EnemyState.CHASE;
+            }
         }
 
         switch (_enemyState)
         {
             case EnemyState.GUARD:
                 {
+                    _isWalk = true;
+                    _isChase = false;
+                    _agent.isStopped = false;
+                    _agent.destination = _guardPos;
 
+                    // 开销：sqrMagniture < Distance
+                    if (Vector3.SqrMagnitude(_guardPos - transform.position) <= _agent.stoppingDistance)
+                    {
+                        _isWalk = false;
+
+                        transform.rotation = Quaternion.Lerp(transform.rotation, _guardRotation, 0.01f);
+                    }
                 }
                 break;
             case EnemyState.PATROL:
@@ -187,7 +218,11 @@ public class EnemyController : MonoBehaviour
                 break;
             case EnemyState.DEAD:
                 {
+                    // 
+                    _coll.enabled = false;
+                    _agent.enabled = false;
 
+                    Destroy(gameObject, 2.0f);
                 }
                 break;
 
@@ -240,6 +275,7 @@ public class EnemyController : MonoBehaviour
         _animator.SetBool("Chase", _isChase);
         _animator.SetBool("Follow", _isFollow);
         _animator.SetBool("Critical", _characterStat.isCritical);
+        _animator.SetBool("Death", _isDead);
     }
 
     private bool FoundPlayer()
@@ -266,7 +302,7 @@ public class EnemyController : MonoBehaviour
         float randomX = Random.Range(-PatrolRange, PatrolRange);
         float randomZ = Random.Range(-PatrolRange, PatrolRange);
 
-        Vector3 randomPoint = new Vector3(_guidePos.x + randomX, transform.position.y, _guidePos.z + randomZ);
+        Vector3 randomPoint = new Vector3(_guardPos.x + randomX, transform.position.y, _guardPos.z + randomZ);
 
         // FIX
         NavMeshHit hit;

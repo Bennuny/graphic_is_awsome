@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SlimData
   m_EditorClassIdentifier: 
   MaxHealth: 10
-  CurrentHealth: 10
+  CurrentHealth: 2
   MaxDefence: 5
   CurrentDefence: 5

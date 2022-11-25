@@ -14,6 +14,10 @@ public class PlayerController : MonoBehaviour
 
     private CharacterStat _characterStat;
 
+    private Collider _coll;
+
+    private bool _isDead;
+
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
@@ -21,11 +25,15 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponent<Animator>();
 
         _characterStat = GetComponent<CharacterStat>();
+
+        _coll = GetComponent<BoxCollider>();
     }
 
 
     private void Update()
     {
+        _isDead = _characterStat.CurrentHealth == 0;
+
         SwitchAnimation();
 
         _lastAttackTime -= Time.deltaTime;
