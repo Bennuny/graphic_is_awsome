@@ -45,8 +45,6 @@ public class MouseManager : MonoBehaviour
 
         if (Physics.Raycast(ray, out _hitinfo))
         {
-            // TODO
-
             switch (_hitinfo.collider.gameObject.tag)
             {
                 case "Ground":

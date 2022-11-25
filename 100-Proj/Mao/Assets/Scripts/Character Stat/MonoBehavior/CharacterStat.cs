@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -198,5 +199,33 @@ public class CharacterStat : MonoBehaviour
             combat.CriticalChance = value;
         }
     }
+    #endregion
+
+    #region
+
+    public void TakeDamage(CharacterStat attacker, CharacterStat defener)
+    {
+        int damage = Math.Max(attacker.CurrentDamage() - defener.CurrentDefence, 0);
+
+        CurrentHealth = Math.Max(CurrentHealth - damage, 0);
+
+        // TODO: update ui
+        // TODO: update exp
+        
+    }
+
+    private int CurrentDamage()
+    {
+        float coreDamage = UnityEngine.Random.Range(MinDamage, MaxDamage);
+
+        if (isCritical)
+        {
+            coreDamage *= CriticalMultiplier;
+            Debug.Log("Critical Damage!" + coreDamage);
+        }
+
+        return (int)coreDamage;
+    }
+
     #endregion
 }

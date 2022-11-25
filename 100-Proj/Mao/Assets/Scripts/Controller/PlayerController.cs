@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -66,8 +64,11 @@ public class PlayerController : MonoBehaviour
         // attack
         if (_lastAttackTime < 0)
         {
+            // critical attack
+            _characterStat.isCritical = Random.value <= _characterStat.CriticalChance;
+            _animator.SetBool("Critical", _characterStat.isCritical);
             _animator.SetTrigger("Attack");
-            _lastAttackTime = 0.5f;
+            _lastAttackTime = _characterStat.CoolDown;
         }
     }
 
@@ -81,5 +82,12 @@ public class PlayerController : MonoBehaviour
         StopAllCoroutines();
         _agent.isStopped = false;
         _agent.destination = target;
+    }
+
+    // Animation Event
+    private void Hit()
+    {
+        var targetStats = _attackTarget.GetComponent<CharacterStat>();
+        targetStats.TakeDamage(_characterStat, targetStats);
     }
 }
