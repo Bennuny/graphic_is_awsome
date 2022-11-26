@@ -270,7 +270,7 @@ GameObject:
   - component: {fileID: 2058596863795895455}
   m_Layer: 0
   m_Name: Polyart_Golem
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -282,7 +282,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2058596862725635065}
-  m_LocalRotation: {x: -0, y: 0.60735434, z: -0, w: 0.7944311}
+  m_LocalRotation: {x: 0, y: 0.6073551, z: 0, w: 0.79443055}
   m_LocalPosition: {x: -15.379397, y: -0.21905069, z: 16.009445}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

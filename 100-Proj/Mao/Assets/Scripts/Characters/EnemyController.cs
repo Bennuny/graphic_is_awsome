@@ -20,7 +20,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
 
     private EnemyState _enemyState;
 
-    private GameObject _attackTarget;
+    protected GameObject _attackTarget;
 
     private Animator _animator;
 
@@ -245,7 +245,9 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
                 {
                     // 
                     _coll.enabled = false;
-                    _agent.enabled = false;
+                    //_agent.enabled = false;
+                    _agent.radius = 0;
+
 
                     Destroy(gameObject, 2.0f);
                 }
@@ -258,16 +260,18 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
     {
         transform.LookAt(_attackTarget.transform.position);
 
-        _animator.SetTrigger("Attack");
+        //_animator.SetTrigger("Attack");
+        if (TargetInSkillRange())
+        {
+            _animator.SetTrigger("Attack");
+            _animator.SetBool("Skill", true);
+        }
+        else if (TargetInAttackRange())
+        {
+            _animator.SetTrigger("Attack");
+            _animator.SetBool("Skill", false);
+        }
 
-        //if (TargetInAttackRange())
-        //{
-        //    _animator.SetTrigger("Attack");
-        //}
-        //else if (TargetInSkillRange())
-        //{
-        //    _animator.SetTrigger("Attack");
-        //}
     }
 
     bool TargetInAttackRange()
