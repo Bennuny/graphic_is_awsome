@@ -12,6 +12,7 @@ public enum EnemyState
 }
 
 [RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(CharacterStat))]
 
 public class EnemyController : MonoBehaviour, IEndGameObserver
 {
@@ -87,6 +88,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
 
     private void Start()
     {
+        // FIXME : FIX when Switch Scene
         GameManager.Instance.AddObserver(this);
 
         if (isGuard)
@@ -107,7 +109,11 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
 
     void OnDisable()
     {
-        //GameManager.Instance.RemoveObserver(this);
+        if (GameManager.IsInitialize)
+        {
+            // FIXME 
+            GameManager.Instance.RemoveObserver(this);
+        }
     }
 
     private void Update()

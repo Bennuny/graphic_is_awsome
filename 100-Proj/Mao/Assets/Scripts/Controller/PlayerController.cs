@@ -55,12 +55,13 @@ public class PlayerController : MonoBehaviour
 
         MouseManager.Instance.OnEnemyClicked += EventAttack;
 
+
         GameManager.Instance.RigisterPlayer(_characterStat);
     }
 
     private void EventAttack(GameObject target)
     {
-        if (target != null)
+        if (target != null && !_isDead)
         {
             _attackTarget = target;
 
@@ -99,8 +100,12 @@ public class PlayerController : MonoBehaviour
     }
 
     public void MoveToTarget(Vector3 target)
-    {
+    { 
         StopAllCoroutines();
+        if (_isDead)
+        {
+            return;
+        }
         _agent.isStopped = false;
         _agent.destination = target;
     }

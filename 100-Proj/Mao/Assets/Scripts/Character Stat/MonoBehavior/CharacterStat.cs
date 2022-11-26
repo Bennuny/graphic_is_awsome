@@ -5,12 +5,22 @@ using UnityEngine;
 
 public class CharacterStat : MonoBehaviour
 {
+    public CharacterData_SO templateData;
+
     public CharacterData_SO characterData;
 
     public Combat_SO combat;
 
     [HideInInspector]
     public bool isCritical;
+
+    private void Awake()
+    {
+        if (templateData != null)
+        {
+            characterData = Instantiate(templateData);
+        }
+    }
 
     #region Read&Write From DATA_SO
     public int MaxHealth

@@ -484,7 +484,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SightRadius: 8
-  isGuard: 0
+  isGuard: 1
   LookAtTime: 2
   PatrolRange: 8
 --- !u!195 &1536041592395636002

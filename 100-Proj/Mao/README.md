@@ -2,6 +2,7 @@
 
 ### Projection Tutorial
 [B站地址](https://www.bilibili.com/video/BV1rf4y1k7vE/?spm_id_from=333.788&vd_source=efa52da0168d65d95fd87b4ef514685d)
+[高级教程地址](https://learn.u3d.cn/tutorial/3drpg-advanced/?tab=author)
 
 ### Dependent Package 
 1. Universal RP
@@ -22,4 +23,6 @@
 3. 渲染管线设置：Project Settings -> Graphics -> Scriptable Render Pipeline Settings
 4. 渲染管线设置：Project Settings -> Quality -> Rendering
 5. 天空盒设置：Window -> Rendering -> Lighting -> Environment -> SkyBox Material
+
+
 
