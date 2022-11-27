@@ -24,7 +24,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
 
     private Animator _animator;
 
-    private CharacterStat _characterStat;
+    protected CharacterStat _characterStat;
 
     private Collider _coll;
 

@@ -134,6 +134,9 @@ GameObject:
   - component: {fileID: 2886612123076471549}
   - component: {fileID: 2886612123076471042}
   - component: {fileID: 2886612122927138047}
+  - component: {fileID: 540387120}
+  - component: {fileID: 540387121}
+  - component: {fileID: 540387122}
   m_Layer: 0
   m_Name: GruntPolyart
   m_TagString: Enemy
@@ -167,7 +170,7 @@ Animator:
   m_GameObject: {fileID: 2886612123076471043}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: eb5e3fc8d0caf3945a6effdb6372a9c7, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f2dd1e8e4b10c4901bc3cb29374914a4, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -189,6 +192,61 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.78, y: 2, z: 1.12}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &540387120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2886612123076471043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e330daf63b5848728e577732cdb06a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SightRadius: 7
+  isGuard: 1
+  LookAtTime: 0
+  PatrolRange: 0
+  kickForce: 20
+--- !u!114 &540387121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2886612123076471043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8998caa10d125411993d8d445c6fb67e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  templateData: {fileID: 11400000, guid: fa05327ca47c04826b2129d275830206, type: 2}
+  characterData: {fileID: 0}
+  combat: {fileID: 11400000, guid: 2aa041ea7deff4fe796137051f44672e, type: 2}
+  isCritical: 0
+--- !u!195 &540387122
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2886612123076471043}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.72
+  m_Speed: 3.2
+  m_Acceleration: 80
+  avoidancePriority: 50
+  m_AngularSpeed: 500
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 0
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &2886612123222580488
 GameObject:
   m_ObjectHideFlags: 0
