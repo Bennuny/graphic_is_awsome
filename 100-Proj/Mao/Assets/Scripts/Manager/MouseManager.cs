@@ -69,6 +69,10 @@ public class MouseManager : Singleton<MouseManager>
             {
                 OnEnemyClicked?.Invoke(_hitinfo.collider.gameObject);
             }
+            else if (_hitinfo.collider.gameObject.CompareTag("Attackable"))
+            {
+                OnEnemyClicked?.Invoke(_hitinfo.collider.gameObject);
+            }
         }
     }
 }

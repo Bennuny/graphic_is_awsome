@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
 
     private bool _isDead;
 
+    private float _stopDistance;
+     
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
@@ -27,6 +29,8 @@ public class PlayerController : MonoBehaviour
         _characterStat = GetComponent<CharacterStat>();
 
         _coll = GetComponent<BoxCollider>();
+
+        _stopDistance = _agent.stoppingDistance;
     }
 
 
@@ -72,6 +76,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator MoveToAttackTarget()
     {
         _agent.isStopped = false;
+        _agent.stoppingDistance = _characterStat.AttackRange;
         transform.LookAt(_attackTarget.transform);
 
         while (Vector3.Distance(_attackTarget.transform.position, transform.position) > _characterStat.AttackRange)
@@ -108,12 +113,26 @@ public class PlayerController : MonoBehaviour
         }
         _agent.isStopped = false;
         _agent.destination = target;
+        _agent.stoppingDistance = _stopDistance;
     }
 
     // Animation Event
     private void Hit()
     {
-        var targetStats = _attackTarget.GetComponent<CharacterStat>();
-        targetStats.TakeDamage(_characterStat, targetStats);
+        if (_attackTarget.CompareTag("Attackable"))
+        {
+            if (_attackTarget.GetComponent<Rock>())
+            {
+                _attackTarget.GetComponent<Rock>()._state = Rock.RockStates.HiEnemey;
+
+                _attackTarget.GetComponent<Rigidbody>().velocity = Vector3.one;
+                _attackTarget.GetComponent<Rigidbody>().AddForce(transform.forward * 20, ForceMode.Impulse);
+            }
+        }
+        else
+        {
+            var targetStats = _attackTarget.GetComponent<CharacterStat>();
+            targetStats.TakeDamage(_characterStat, targetStats);
+        }
     }
 }

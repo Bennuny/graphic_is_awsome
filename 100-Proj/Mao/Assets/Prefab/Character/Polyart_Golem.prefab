@@ -268,6 +268,9 @@ GameObject:
   - component: {fileID: 2058596862725635067}
   - component: {fileID: 2058596862725635064}
   - component: {fileID: 2058596863795895455}
+  - component: {fileID: 1364627951}
+  - component: {fileID: 1364627952}
+  - component: {fileID: 1364627953}
   m_Layer: 0
   m_Name: Polyart_Golem
   m_TagString: Enemy
@@ -301,7 +304,7 @@ Animator:
   m_GameObject: {fileID: 2058596862725635065}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 0f2c5202b918687408ac5bc7429a03ea, type: 3}
-  m_Controller: {fileID: 9100000, guid: f2dd1e8e4b10c4901bc3cb29374914a4, type: 2}
+  m_Controller: {fileID: 22100000, guid: ffd6683a6bdb64deca617c8c6f8a4717, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -323,6 +326,61 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.35, y: 4, z: 2.2}
   m_Center: {x: 0, y: 2, z: 0.2}
+--- !u!114 &1364627951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2058596862725635065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a51ebc8707b164d079f0f1eec883c084, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SightRadius: 10
+  isGuard: 1
+  LookAtTime: 0
+  PatrolRange: 0
+  kickForce: 25
+--- !u!114 &1364627952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2058596862725635065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8998caa10d125411993d8d445c6fb67e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  templateData: {fileID: 11400000, guid: 61d0bceec6ed34df08d13ed881119754, type: 2}
+  characterData: {fileID: 0}
+  combat: {fileID: 11400000, guid: b56b7ebf33595415da537e4d7559226b, type: 2}
+  isCritical: 0
+--- !u!195 &1364627953
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2058596862725635065}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 2
+  m_Acceleration: 50
+  avoidancePriority: 50
+  m_AngularSpeed: 500
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 0
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &2058596862747215952
 GameObject:
   m_ObjectHideFlags: 0

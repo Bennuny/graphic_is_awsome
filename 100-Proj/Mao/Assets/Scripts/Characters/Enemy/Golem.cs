@@ -8,6 +8,11 @@ public class Golem : EnemyController
     [Header("Skill")]
     public float kickForce = 25;
 
+    public GameObject _rockPrefab;
+
+    public Transform handPos;
+
+    // Animation Event
     public void KickOff()
     {
         if (_attackTarget != null && transform.isFacingTarget(_attackTarget.transform))
@@ -23,6 +28,16 @@ public class Golem : EnemyController
             _attackTarget.GetComponent<Animator>().SetTrigger("Dizzy");
 
             attackStat.TakeDamage(_characterStat, attackStat);
+        }
+    }
+
+    // Animation Event
+    public void ThrowRock()
+    {
+        if (_attackTarget != null)
+        {
+            var rock = Instantiate(_rockPrefab, handPos.position, Quaternion.identity);
+            rock.GetComponent<Rock>()._target = _attackTarget;
         }
     }
 }
