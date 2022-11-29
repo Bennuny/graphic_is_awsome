@@ -3,8 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class CharacterStat : MonoBehaviour
 {
+    // Current, Total
+    public event Action<int, int> UpdateHealthBarOnAttack;
+
     public CharacterData_SO templateData;
 
     public CharacterData_SO characterData;
@@ -225,15 +229,22 @@ public class CharacterStat : MonoBehaviour
         }
 
         // TODO: update ui
+        UpdateHealthBarOnAttack?.Invoke(CurrentHealth, MaxHealth);
+
         // TODO: update exp
-        
+        if (CurrentHealth <= 0)
+        {
+            attacker.characterData.UpdateExp(characterData.KillPoint);
+        }
     }
 
     public void TakeDamage(int damage, CharacterStat defener)
     {
-        var realDamage = Math.Max(damage - defener.CurrentHealth, 0);
+        var realDamage = Math.Max(damage - defener.CurrentDefence, 0);
 
-        defener.CurrentHealth = Math.Max(defener.CurrentHealth - realDamage, 0);
+        CurrentHealth = Math.Max(CurrentHealth - realDamage, 0);
+
+        UpdateHealthBarOnAttack?.Invoke(CurrentHealth, MaxHealth);
     }
 
     private int CurrentDamage()
