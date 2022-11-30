@@ -953,6 +953,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TurtleShell
       objectReference: {fileID: 0}
+    - target: {fileID: 6154668877144630521, guid: f792a263eabd649d8af47e7c28df81c8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6160388877446827715, guid: f792a263eabd649d8af47e7c28df81c8, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -12809,7 +12813,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 789388563}
-  m_LocalRotation: {x: 0.014764065, y: 0.9819747, z: -0.16733591, w: 0.08663975}
+  m_LocalRotation: {x: 0.014764064, y: 0.9819747, z: -0.16733591, w: 0.08663973}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -14367,7 +14371,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.01601995, y: 0.97944266, z: -0.18157013, w: 0.08641631}
+  m_LocalRotation: {x: 0.016019957, y: 0.97944266, z: -0.18157013, w: 0.08641634}
   m_LocalPosition: {x: 2.794881, y: 4.9042683, z: 0.24654198}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -14869,7 +14873,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 998864253}
-  m_LocalRotation: {x: 0.016333407, y: 0.9787774, z: -0.18512282, w: 0.08635763}
+  m_LocalRotation: {x: 0.01633341, y: 0.9787774, z: -0.18512282, w: 0.08635766}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -15888,6 +15892,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3842894139127470702, guid: a8f2ea3057a3045e595f7e119eaf78cf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a8f2ea3057a3045e595f7e119eaf78cf, type: 3}
 --- !u!1001 &1083088886
@@ -16860,7 +16868,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh22846
+  m_Name: pb_Mesh23886
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -19316,7 +19324,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1474545051}
-  m_LocalRotation: {x: 0.01790151, y: 0.97524816, z: -0.20289566, w: 0.08604625}
+  m_LocalRotation: {x: 0.017901504, y: 0.97524816, z: -0.20289567, w: 0.086046234}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -82018,6 +82026,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySlim
       objectReference: {fileID: 0}
+    - target: {fileID: 1537923077540246111, guid: 24d816e91384d498e8ea67903a5206d0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1540044873103824865, guid: 24d816e91384d498e8ea67903a5206d0, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -82083,6 +82095,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Polyart_Golem
       objectReference: {fileID: 0}
+    - target: {fileID: 2058596862725635065, guid: da4b9b4898cb843b49eb13267dcf83e0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2058596862725635067, guid: da4b9b4898cb843b49eb13267dcf83e0, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -82139,6 +82155,10 @@ PrefabInstance:
     - target: {fileID: 2886612123076471043, guid: f4c6c79656cb743228d510b29d4932ea, type: 3}
       propertyPath: m_Name
       value: GruntPolyart
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886612123076471043, guid: f4c6c79656cb743228d510b29d4932ea, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2886612123076471549, guid: f4c6c79656cb743228d510b29d4932ea, type: 3}
       propertyPath: m_RootOrder
