@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   MaxHealth: 200
-  CurrentHealth: 197
+  CurrentHealth: 200
   MaxDefence: 1
   CurrentDefence: 1
   KillPoint: 0

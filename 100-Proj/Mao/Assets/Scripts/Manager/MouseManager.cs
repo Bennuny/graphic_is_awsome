@@ -21,7 +21,7 @@ public class MouseManager : Singleton<MouseManager>
     {
         base.Awake();
 
-        //DontDestroyOnLoad(this);
+        DontDestroyOnLoad(this);
     }
 
     private void Update()

@@ -10,6 +10,14 @@ public class SceneController : Singleton<SceneController>
 
     private NavMeshAgent agent;
 
+    public GameObject PlayerPrefab;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        DontDestroyOnLoad(this);
+    }
+
     public void TransitionToDestination(TransitionPoint transitionPoint)
     {
         switch (transitionPoint.transitionType)
@@ -21,7 +29,7 @@ public class SceneController : Singleton<SceneController>
                 break;
             case TransitionPoint.TransitionType.DifferentScene:
                 {
-
+                    StartCoroutine(Transition(transitionPoint.sceneName, transitionPoint.destinationTag));
                 }
                 break;
         }
@@ -29,19 +37,38 @@ public class SceneController : Singleton<SceneController>
 
     IEnumerator Transition(string sceneName, TransitionDestination.DestinationTag destinationTag)
     {
-        player = GameManager.Instance.playerStats.gameObject;
-
-        agent = player.GetComponent<NavMeshAgent>();
-        agent.enabled = false;
-
-        var destNode = GetDestination(destinationTag);
-
-        player.transform.SetPositionAndRotation(destNode.transform.position, destNode.transform.rotation);
+        SaveManager.Instance.SavePlayerData();
 
 
-        agent.enabled = true;
+        var activeSceneName = SceneManager.GetActiveScene().name;
+        if (activeSceneName == sceneName)
+        {
+            player = GameManager.Instance.playerStats.gameObject;
 
-        yield return null;
+            agent = player.GetComponent<NavMeshAgent>();
+            agent.enabled = false;
+
+            var destNode = GetDestination(destinationTag);
+            player.transform.SetPositionAndRotation(destNode.transform.position, destNode.transform.rotation);
+
+            agent.enabled = true;
+
+            yield return null;
+        }
+        else
+        {
+            Debug.Log("Transition Scene Name " + sceneName);
+
+            yield return SceneManager.LoadSceneAsync(sceneName);
+
+            var destNode = GetDestination(destinationTag);
+            yield return Instantiate(PlayerPrefab, destNode.transform.position, destNode.transform.rotation);
+
+            SaveManager.Instance.LoadPlayerData();
+
+            yield break;
+        }
+
     }
 
     TransitionDestination GetDestination(TransitionDestination.DestinationTag destinationTag)
@@ -57,5 +84,17 @@ public class SceneController : Singleton<SceneController>
         }
 
         return null;
+    }
+
+
+    public void TransitionToMain()
+    {
+        StartCoroutine(LoadMain());
+    }
+
+    IEnumerator LoadMain()
+    {
+        yield return SceneManager.LoadSceneAsync("Main");
+        yield break;
     }
 }
