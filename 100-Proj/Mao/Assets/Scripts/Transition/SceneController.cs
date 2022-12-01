@@ -1,0 +1,61 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.AI;
+
+public class SceneController : Singleton<SceneController>
+{
+    private GameObject player;
+
+    private NavMeshAgent agent;
+
+    public void TransitionToDestination(TransitionPoint transitionPoint)
+    {
+        switch (transitionPoint.transitionType)
+        {
+            case TransitionPoint.TransitionType.SameScene:
+                {
+                    StartCoroutine(Transition(SceneManager.GetActiveScene().name, transitionPoint.destinationTag));
+                }
+                break;
+            case TransitionPoint.TransitionType.DifferentScene:
+                {
+
+                }
+                break;
+        }
+    }
+
+    IEnumerator Transition(string sceneName, TransitionDestination.DestinationTag destinationTag)
+    {
+        player = GameManager.Instance.playerStats.gameObject;
+
+        agent = player.GetComponent<NavMeshAgent>();
+        agent.enabled = false;
+
+        var destNode = GetDestination(destinationTag);
+
+        player.transform.SetPositionAndRotation(destNode.transform.position, destNode.transform.rotation);
+
+
+        agent.enabled = true;
+
+        yield return null;
+    }
+
+    TransitionDestination GetDestination(TransitionDestination.DestinationTag destinationTag)
+    {
+        var entrances = FindObjectsOfType<TransitionDestination>();
+
+        for (int i = 0; i < entrances.Length; i++)
+        {
+            if (entrances[i].transtionTag == destinationTag)
+            {
+                return entrances[i];
+            }
+        }
+
+        return null;
+    }
+}
