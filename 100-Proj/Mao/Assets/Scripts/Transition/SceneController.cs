@@ -86,15 +86,45 @@ public class SceneController : Singleton<SceneController>
         return null;
     }
 
+    public void TransitionToLoadGame()
+    {
+        StartCoroutine(LoadLevel(SaveManager.Instance.SceneName));
+    }
+
+
+    public void TransitionToFirstLevel()
+    {
+        StartCoroutine(LoadLevel("MaoScene"));
+    }
+
+    IEnumerator LoadLevel(string sceneName)
+    {
+        if (sceneName != "")
+        {
+            yield return SceneManager.LoadSceneAsync(sceneName);
+
+            yield return player = Instantiate(PlayerPrefab, GameManager.Instance.GetEntrance().position, GameManager.Instance.GetEntrance().rotation);
+
+            //
+            SaveManager.Instance.SavePlayerData();
+
+            yield break;
+        }
+
+        yield break;
+    }
+
 
     public void TransitionToMain()
     {
         StartCoroutine(LoadMain());
     }
 
+
     IEnumerator LoadMain()
     {
-        yield return SceneManager.LoadSceneAsync("Main");
+        yield return SceneManager.LoadSceneAsync("MainScene");
+
         yield break;
     }
 }

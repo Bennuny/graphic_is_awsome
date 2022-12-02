@@ -49,4 +49,19 @@ public class GameManager : Singleton<GameManager>
             obj.EndNotifiy();
         }
     }
+
+    //
+
+    public Transform GetEntrance()
+    {
+        foreach (var item in FindObjectsOfType<TransitionDestination>())
+        {
+            if (item.transtionTag == TransitionDestination.DestinationTag.ENTER)
+            {
+                return item.transform;
+            }
+        }
+
+        return null;
+    }
 }

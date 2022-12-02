@@ -1,15 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SaveManager : Singleton<SaveManager>
 {
+    string sceneName = "key_current_level";
+
+
+    public string SceneName
+    {
+        get
+        {
+            return PlayerPrefs.GetString(sceneName);
+        }
+    }
+
     protected override void Awake()
     {
         base.Awake();
         DontDestroyOnLoad(this);
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneController.Instance.TransitionToMain();
+        }
+        else if (Input.GetKeyDown(KeyCode.S))
+        {
+            SavePlayerData();
+        }
+        else if (Input.GetKeyDown(KeyCode.L))
+        {
+            LoadPlayerData();
+        }
+    }
 
 
     public void SavePlayerData()
@@ -26,6 +53,9 @@ public class SaveManager : Singleton<SaveManager>
     {
         var jsonData = JsonUtility.ToJson(data, true);
         PlayerPrefs.SetString(key, jsonData);
+
+        PlayerPrefs.SetString(sceneName, SceneManager.GetActiveScene().name);
+
         PlayerPrefs.Save();
     }
 

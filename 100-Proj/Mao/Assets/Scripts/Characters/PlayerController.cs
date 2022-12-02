@@ -72,6 +72,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        SaveManager.Instance.LoadPlayerData();
     }
 
     private void EventAttack(GameObject target)
