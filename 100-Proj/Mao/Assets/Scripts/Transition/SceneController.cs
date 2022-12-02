@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.AI;
 
-public class SceneController : Singleton<SceneController>
+public class SceneController : Singleton<SceneController>, IEndGameObserver
 {
     private GameObject player;
 
@@ -12,10 +12,21 @@ public class SceneController : Singleton<SceneController>
 
     public GameObject PlayerPrefab;
 
+    public SceneFader sceneFaderPrefab;
+
+    bool fadeFinish;
+
     protected override void Awake()
     {
         base.Awake();
         DontDestroyOnLoad(this);
+    }
+
+    private void Start()
+    {
+        GameManager.Instance.AddObserver(this);
+
+        fadeFinish = true;
     }
 
     public void TransitionToDestination(TransitionPoint transitionPoint)
@@ -99,14 +110,22 @@ public class SceneController : Singleton<SceneController>
 
     IEnumerator LoadLevel(string sceneName)
     {
+        SceneFader fade = Instantiate(sceneFaderPrefab);
+
+
+
         if (sceneName != "")
         {
+            yield return fade.StartCoroutine(fade.FadeOut(2.0f));
+
             yield return SceneManager.LoadSceneAsync(sceneName);
 
             yield return player = Instantiate(PlayerPrefab, GameManager.Instance.GetEntrance().position, GameManager.Instance.GetEntrance().rotation);
 
             //
             SaveManager.Instance.SavePlayerData();
+
+            yield return fade.StartCoroutine(fade.FadeIn(2.0f));
 
             yield break;
         }
@@ -123,8 +142,24 @@ public class SceneController : Singleton<SceneController>
 
     IEnumerator LoadMain()
     {
+        SceneFader fade = Instantiate(sceneFaderPrefab);
+
+        yield return fade.StartCoroutine(fade.FadeOut(2.0f));
+
         yield return SceneManager.LoadSceneAsync("MainScene");
 
+        yield return fade.StartCoroutine(fade.FadeIn(1.0f));
+
         yield break;
+    }
+
+    void IEndGameObserver.EndNotifiy()
+    {
+        if (fadeFinish)
+        {
+            fadeFinish = false;
+        }
+
+        TransitionToMain();
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Playables;
 
 
 public class MainMenu : MonoBehaviour
@@ -12,7 +13,7 @@ public class MainMenu : MonoBehaviour
 
     Button btnExit;
 
-
+    PlayableDirector director;
 
     private void Awake()
     {
@@ -25,9 +26,13 @@ public class MainMenu : MonoBehaviour
 
         btnExit.onClick.AddListener(QuitGame);
 
-        btnNewGame.onClick.AddListener(NewGame);
+        btnNewGame.onClick.AddListener(PlayTimeline);
 
         btnContinue.onClick.AddListener(ContinueGame);
+
+        director = FindObjectOfType<PlayableDirector>();
+
+        director.stopped += NewGame;
     }
 
     void QuitGame()
@@ -44,11 +49,17 @@ public class MainMenu : MonoBehaviour
     }
 
 
-    void NewGame()
+    void NewGame(PlayableDirector obj)
     {
         PlayerPrefs.DeleteAll();
         // Transition Scene
 
         SceneController.Instance.TransitionToFirstLevel();
+    }
+
+
+    void PlayTimeline()
+    {
+        director.Play();
     }
 }
