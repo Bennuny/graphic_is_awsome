@@ -15,6 +15,9 @@ public class CharacterStat : MonoBehaviour
 
     public Combat_SO combat;
 
+    [Header("Weapon")]
+    public Transform weaponSlot;
+
     [HideInInspector]
     public bool isCritical;
 
@@ -290,6 +293,21 @@ public class CharacterStat : MonoBehaviour
         {
             return characterData.CurrentLevel;
         }
+    }
+
+    #endregion
+
+
+    #region Equip Weapon
+    public void EquipWeapon(ItemData_SO weapon)
+    {
+        if (weapon.WeaponPrefab != null)
+        {
+            Instantiate(weapon.WeaponPrefab, weaponSlot);
+        }
+
+        // TODO: modify property
+        combat.ApplyWeaponData(weapon.WeaponData);
     }
 
     #endregion

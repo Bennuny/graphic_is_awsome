@@ -20,4 +20,17 @@ public class Combat_SO : ScriptableObject
 
     // 暴击率
     public float CriticalChance;
+
+    public void ApplyWeaponData(Combat_SO weapon)
+    {
+        AttackRange = weapon.AttackRange;
+
+        SkillRange = weapon.SkillRange;
+
+        CoolDown = weapon.CoolDown;
+
+        MinDamage += weapon.MinDamage;
+
+        MaxDamage += weapon.MaxDamage;
+    }
 }

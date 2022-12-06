@@ -15,6 +15,8 @@ public class ItemPickup : MonoBehaviour
 
             // equip weapon
 
+            GameManager.Instance.playerStats.EquipWeapon(itemData);
+
             Destroy(gameObject);
         }
     }

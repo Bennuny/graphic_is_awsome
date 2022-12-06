@@ -13100,7 +13100,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 789388563}
-  m_LocalRotation: {x: 0.014764064, y: 0.9819747, z: -0.16733591, w: 0.08663973}
+  m_LocalRotation: {x: 0.014764065, y: 0.9819747, z: -0.16733591, w: 0.08663975}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -14583,7 +14583,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.016019957, y: 0.97944266, z: -0.18157013, w: 0.08641634}
+  m_LocalRotation: {x: 0.01601995, y: 0.97944266, z: -0.18157013, w: 0.08641631}
   m_LocalPosition: {x: 2.794881, y: 4.9042683, z: 0.24654198}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -15164,7 +15164,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 998864253}
-  m_LocalRotation: {x: 0.01633341, y: 0.9787774, z: -0.18512282, w: 0.08635766}
+  m_LocalRotation: {x: 0.016333407, y: 0.9787774, z: -0.18512282, w: 0.08635763}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -19587,7 +19587,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1474545051}
-  m_LocalRotation: {x: 0.01790151, y: 0.97524816, z: -0.20289567, w: 0.086046256}
+  m_LocalRotation: {x: 0.01790151, y: 0.97524816, z: -0.20289566, w: 0.08604625}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -81353,10 +81353,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 912845098, guid: 26e5b2570b8d645e594fa28cdac804c8, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1505680822460630163, guid: 26e5b2570b8d645e594fa28cdac804c8, type: 3}
       propertyPath: m_Name
       value: Sword

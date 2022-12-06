@@ -17,3 +17,6 @@ MonoBehaviour:
   Icon: {fileID: 0}
   Amount: 1
   Description: "\u4E00\u628A\u666E\u901A\u7684\u5251\uFF0C\u53EF\u80FD\u662F\u4E0A\u4E2A\u65C5\u4EBA\u7559\u4E0B\u7684\u3002"
+  stackable: 0
+  WeaponPrefab: {fileID: 8923668920753146337, guid: f65bcc89d51b3409c8fc67c13a2e7bdf, type: 3}
+  WeaponData: {fileID: 11400000, guid: 96af53ab2e2034ebbba9ad63d439a6ed, type: 2}

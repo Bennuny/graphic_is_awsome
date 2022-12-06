@@ -1295,6 +1295,7 @@ MonoBehaviour:
   templateData: {fileID: 11400000, guid: 58b2f4710b5e34cc48508e90257be87f, type: 2}
   characterData: {fileID: 0}
   combat: {fileID: 11400000, guid: bc4a0bac6741440a08b78a7a6b093cf2, type: 2}
+  weaponSlot: {fileID: 3842894139126974398}
   isCritical: 0
 --- !u!54 &1072638835
 Rigidbody:
