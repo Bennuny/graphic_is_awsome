@@ -11,11 +11,10 @@ public class ItemPickup : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // TODO: add item to bag
-
+            InventoryManager.Instance.inventoryData.AddItem(itemData, itemData.Amount);
 
             // equip weapon
-
-            GameManager.Instance.playerStats.EquipWeapon(itemData);
+            // GameManager.Instance.playerStats.EquipWeapon(itemData);
 
             Destroy(gameObject);
         }
