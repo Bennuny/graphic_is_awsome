@@ -57,6 +57,11 @@ public class MouseManager : Singleton<MouseManager>
                         Cursor.SetCursor(Doorwar, new Vector2(16, 16), CursorMode.Auto);
                     }
                     break;
+                case "Item":
+                    {
+                        Cursor.SetCursor(Point, new Vector2(16, 16), CursorMode.Auto);
+                    }
+                    break;
                 default:
                     {
                         Cursor.SetCursor(Arrow, new Vector2(16, 16), CursorMode.Auto);
@@ -84,6 +89,10 @@ public class MouseManager : Singleton<MouseManager>
                 OnEnemyClicked?.Invoke(_hitinfo.collider.gameObject);
             }
             else if (_hitinfo.collider.gameObject.CompareTag("Protal"))
+            {
+                OnMouseClicked?.Invoke(_hitinfo.point);
+            }
+            else if (_hitinfo.collider.gameObject.CompareTag("Item"))
             {
                 OnMouseClicked?.Invoke(_hitinfo.point);
             }

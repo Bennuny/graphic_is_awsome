@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Attackable
   - Protal
+  - Item
   layers:
   - Default
   - TransparentFX
