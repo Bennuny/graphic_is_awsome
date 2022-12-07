@@ -15,7 +15,6 @@ public class SlotHolder : MonoBehaviour
 
     public ItemUI itemUI;
 
-
     public void UpdateItem()
     {
         switch (slotType)
