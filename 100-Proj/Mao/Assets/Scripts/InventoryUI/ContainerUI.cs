@@ -10,10 +10,6 @@ public class ContainerUI : MonoBehaviour
     {
         for (int i = 0; i < slotHolders.Length; i++)
         {
-            Debug.Log("refresh item " + i);
-            Debug.Log(slotHolders[i]);
-            Debug.Log(slotHolders[i].itemUI);
-
             slotHolders[i].itemUI.Index = i;
 
             slotHolders[i].UpdateItem();
