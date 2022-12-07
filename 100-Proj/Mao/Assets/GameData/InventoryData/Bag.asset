@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bag
   m_EditorClassIdentifier: 
   items:
-  - ItemData: {fileID: 0}
+  - ItemData: {fileID: 11400000, guid: 9b2ced8002d1e4f028e7c882f22dcecf, type: 2}
     Amount: 0
   - ItemData: {fileID: 0}
     Amount: 0

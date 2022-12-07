@@ -13,6 +13,8 @@ public class ItemPickup : MonoBehaviour
             // TODO: add item to bag
             InventoryManager.Instance.inventoryData.AddItem(itemData, itemData.Amount);
 
+            InventoryManager.Instance.inventoryUI.RefreshUI();
+
             // equip weapon
             // GameManager.Instance.playerStats.EquipWeapon(itemData);
 
