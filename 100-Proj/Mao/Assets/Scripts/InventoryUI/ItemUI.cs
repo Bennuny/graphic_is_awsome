@@ -24,6 +24,15 @@ public class ItemUI : MonoBehaviour
 
     public void SetupItemUI(ItemData_SO item, int itemAmount)
     {
+        if (itemAmount == 0)
+        {
+            Bag.items[Index].ItemData = null;
+            icon.gameObject.SetActive(false);
+            amount.gameObject.SetActive(false);
+
+            return;
+        }
+
         if (item != null)
         {
             icon.sprite = item.Icon;
@@ -38,5 +47,10 @@ public class ItemUI : MonoBehaviour
             icon.gameObject.SetActive(false);
             amount.gameObject.SetActive(false);
         }
+    }
+
+    public ItemData_SO GetItem()
+    {
+        return Bag.items[Index].ItemData;
     }
 }

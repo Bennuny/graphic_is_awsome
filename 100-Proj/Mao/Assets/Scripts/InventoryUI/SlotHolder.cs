@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public enum SLOT_TYPE {
     BAG,
@@ -9,11 +10,29 @@ public enum SLOT_TYPE {
     ACTION,
 }
 
-public class SlotHolder : MonoBehaviour
+public class SlotHolder : MonoBehaviour, IPointerClickHandler
 {
     public SLOT_TYPE slotType;
 
     public ItemUI itemUI;
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (eventData.clickCount % 2 == 0)
+        {
+            UseItem();    
+        }
+    }
+
+    public void UseItem()
+    {
+        if (itemUI.GetItem().Type == ITEM_TYPE.USEABLE && itemUI.Bag.items[itemUI.Index].Amount > 0)
+        {
+            GameManager.Instance.playerStats.ApplyHealth(itemUI.GetItem().useableData.healthPoint);
+
+            itemUI.Bag.items[itemUI.Index].Amount -= 1;
+        }
+    }
 
     public void UpdateItem()
     {
@@ -28,7 +47,7 @@ public class SlotHolder : MonoBehaviour
                 {
                     itemUI.Bag = InventoryManager.Instance.equipmentData;
 
-                    if (itemUI.Bag.items[itemUI.Index].ItemData != null)
+                    if (itemUI.GetItem() != null)
                     {
                         GameManager.Instance.playerStats.ChangeWeapon(itemUI.Bag.items[itemUI.Index].ItemData);
                     }
@@ -52,7 +71,6 @@ public class SlotHolder : MonoBehaviour
 
         var item = itemUI.Bag.items[itemUI.Index];
         itemUI.SetupItemUI(item.ItemData, item.Amount);
-
     }
 
 }

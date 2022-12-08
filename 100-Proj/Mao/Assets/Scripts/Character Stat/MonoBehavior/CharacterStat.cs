@@ -338,4 +338,13 @@ public class CharacterStat : MonoBehaviour
     }
 
     #endregion
+
+    #region apply data change
+
+    public void ApplyHealth(int amount)
+    {
+        CurrentHealth = Math.Min(CurrentHealth + amount, MaxHealth);
+    }
+
+    #endregion
 }
