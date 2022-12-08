@@ -26,7 +26,7 @@ public class SlotHolder : MonoBehaviour
                 break;
             case SLOT_TYPE.WEAPON:
                 {
-                    //itemUI
+                    itemUI.Bag = InventoryManager.Instance.equipmentData;
                 }
                 break;
             case SLOT_TYPE.ARMOR:
@@ -36,7 +36,7 @@ public class SlotHolder : MonoBehaviour
                 break;
             case SLOT_TYPE.ACTION:
                 {
-                    //itemUI
+                    itemUI.Bag = InventoryManager.Instance.actionData;
                 }
                 break;
         }
