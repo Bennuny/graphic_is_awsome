@@ -27,11 +27,20 @@ public class SlotHolder : MonoBehaviour
             case SLOT_TYPE.WEAPON:
                 {
                     itemUI.Bag = InventoryManager.Instance.equipmentData;
+
+                    if (itemUI.Bag.items[itemUI.Index].ItemData != null)
+                    {
+                        GameManager.Instance.playerStats.ChangeWeapon(itemUI.Bag.items[itemUI.Index].ItemData);
+                    }
+                    else
+                    {
+                        GameManager.Instance.playerStats.UnEquipWeapon();
+                    }
                 }
                 break;
             case SLOT_TYPE.ARMOR:
                 {
-                    //itemUI
+                    itemUI.Bag = InventoryManager.Instance.equipmentData;
                 }
                 break;
             case SLOT_TYPE.ACTION:

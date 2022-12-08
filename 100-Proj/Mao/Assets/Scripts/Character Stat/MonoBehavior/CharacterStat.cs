@@ -15,6 +15,8 @@ public class CharacterStat : MonoBehaviour
 
     public Combat_SO combat;
 
+    private Combat_SO baseCombat;
+
     [Header("Weapon")]
     public Transform weaponSlot;
 
@@ -27,6 +29,8 @@ public class CharacterStat : MonoBehaviour
         {
             characterData = Instantiate(templateData);
         }
+
+        baseCombat = Instantiate(combat);
     }
 
     #region Read&Write From DATA_SO
@@ -299,6 +303,13 @@ public class CharacterStat : MonoBehaviour
 
 
     #region Equip Weapon
+
+    public void ChangeWeapon(ItemData_SO weapon)
+    {
+        UnEquipWeapon();
+        EquipWeapon(weapon);
+    }
+
     public void EquipWeapon(ItemData_SO weapon)
     {
         if (weapon.WeaponPrefab != null)
@@ -306,8 +317,24 @@ public class CharacterStat : MonoBehaviour
             Instantiate(weapon.WeaponPrefab, weaponSlot);
         }
 
-        // TODO: modify property
         combat.ApplyWeaponData(weapon.WeaponData);
+        // TODO: animation
+    }
+
+    //
+    public void UnEquipWeapon()
+    {
+        if (weaponSlot.transform.childCount != 0)
+        {
+            for (int i = 0; i < weaponSlot.transform.childCount; i++)
+            {
+                Destroy(weaponSlot.transform.GetChild(i).gameObject);
+            }
+        }
+
+        combat.ApplyWeaponData(baseCombat);
+
+        // TODO: animation
     }
 
     #endregion

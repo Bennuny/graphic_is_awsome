@@ -45,8 +45,8 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         // 指向UI物品
         if (EventSystem.current.IsPointerOverGameObject())
         {
-            //if (InventoryManager.Instance.CheckActionUI(eventData.position) || InventoryManager.Instance.CheckEquipmentUI(eventData.position) || InventoryManager.Instance.CheckInventoryUI(eventData.position))
-            if (InventoryManager.Instance.CheckInventoryUI(eventData.position))
+            if (InventoryManager.Instance.CheckActionUI(eventData.position) || InventoryManager.Instance.CheckEquipmentUI(eventData.position) || InventoryManager.Instance.CheckInventoryUI(eventData.position))
+            //if (InventoryManager.Instance.CheckInventoryUI(eventData.position))
             {
                 if (eventData.pointerEnter.gameObject.GetComponent<SlotHolder>())
                 {
@@ -67,17 +67,26 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                         break;
                     case SLOT_TYPE.WEAPON:
                         {
-
+                            if (currentItemUI.Bag.items[currentItemUI.Index].ItemData.Type == ITEM_TYPE.WEAPON)
+                            {
+                                SwapItem();
+                            }
                         }
                         break;
                     case SLOT_TYPE.ARMOR:
                         {
-
+                            if (currentItemUI.Bag.items[currentItemUI.Index].ItemData.Type == ITEM_TYPE.ARMOR)
+                            {
+                                SwapItem();
+                            }
                         }
                         break;
                     case SLOT_TYPE.ACTION:
                         {
-
+                            if (currentItemUI.Bag.items[currentItemUI.Index].ItemData.Type == ITEM_TYPE.USEABLE)
+                            {
+                                SwapItem();
+                            }
                         }
                         break;
                 }

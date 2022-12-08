@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.EventSystems;
 
 
 // [System.Serializable]
@@ -31,7 +32,10 @@ public class MouseManager : Singleton<MouseManager>
 
         SetCursorTexture();
 
-        MouseControl();
+        if (!InteractiveUI())
+        {
+            MouseControl();
+        }
     }
 
     private void SetCursorTexture()
@@ -98,5 +102,14 @@ public class MouseManager : Singleton<MouseManager>
             }
 
         }
+    }
+
+    private bool InteractiveUI()
+    {
+        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+        {
+            return true;
+        }
+        return false;
     }
 }
