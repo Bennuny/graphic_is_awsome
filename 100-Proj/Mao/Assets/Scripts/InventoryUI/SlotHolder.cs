@@ -26,6 +26,11 @@ public class SlotHolder : MonoBehaviour, IPointerClickHandler
 
     public void UseItem()
     {
+        if (itemUI.GetItem() == null)
+        {
+            return;
+        }
+
         if (itemUI.GetItem().Type == ITEM_TYPE.USEABLE && itemUI.Bag.items[itemUI.Index].Amount > 0)
         {
             GameManager.Instance.playerStats.ApplyHealth(itemUI.GetItem().useableData.healthPoint);

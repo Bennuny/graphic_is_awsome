@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryManager : Singleton<InventoryManager>
 {
@@ -31,6 +32,17 @@ public class InventoryManager : Singleton<InventoryManager>
 
     public DragData currentDrag;
 
+    public GameObject bagPanel;
+
+    public GameObject statsPanel;
+
+    bool isOpen = false;
+
+    [Header("Stats Text")]
+    public Text healthText;
+
+    public Text combatText;
+
     private void Start()
     {
         inventoryUI.RefreshUI();
@@ -38,6 +50,25 @@ public class InventoryManager : Singleton<InventoryManager>
         actionUI.RefreshUI();
 
         equipmentUI.RefreshUI();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            isOpen = !isOpen;
+            bagPanel.SetActive(isOpen);
+            statsPanel.SetActive(isOpen);
+        }
+
+        var playerStat = GameManager.Instance.playerStats;
+        UpdateStatsText(playerStat.MaxHealth, (int)playerStat.MinDamage, (int)playerStat.MaxDamage);
+    }
+
+    public void UpdateStatsText(int health, int combatMin, int combatMax)
+    {
+        healthText.text = health.ToString();
+        combatText.text = combatMin.ToString() + "-" + combatMax.ToString();
     }
 
     #region 拖拽物品是否在slot范围内

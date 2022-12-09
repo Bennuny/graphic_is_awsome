@@ -319,6 +319,8 @@ public class CharacterStat : MonoBehaviour
 
         combat.ApplyWeaponData(weapon.WeaponData);
         // TODO: animation
+
+        InventoryManager.Instance.UpdateStatsText(CurrentHealth, (int)(MinDamage), (int)MaxDamage);
     }
 
     //

@@ -15,9 +15,9 @@ MonoBehaviour:
   Type: 0
   Name: "\u8611\u83C7"
   Icon: {fileID: 21300000, guid: eb6a4f49d457b4165b5859fe42673f53, type: 3}
-  Amount: 1
+  Amount: 64
   Description: "\u6211\u662F\u4E00\u6735\u8611\u83C7\uFF0C\u5403\u4E86\u6211\u53EF\u4EE5\u6062\u590D10\u70B9\u58F0\u660E\u3002"
   stackable: 1
   WeaponPrefab: {fileID: 0}
   WeaponData: {fileID: 0}
-  itemData: {fileID: 11400000, guid: 73f0bfb3d74e5423eb46d1b959f9cc11, type: 2}
+  useableData: {fileID: 11400000, guid: 73f0bfb3d74e5423eb46d1b959f9cc11, type: 2}
