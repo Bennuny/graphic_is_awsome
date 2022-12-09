@@ -43,6 +43,9 @@ public class InventoryManager : Singleton<InventoryManager>
 
     public Text combatText;
 
+    [Header("Tooltip")]
+    public ItemToolTips tooltip;
+
     private void Start()
     {
         inventoryUI.RefreshUI();

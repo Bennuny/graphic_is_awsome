@@ -10,7 +10,7 @@ public enum SLOT_TYPE {
     ACTION,
 }
 
-public class SlotHolder : MonoBehaviour, IPointerClickHandler
+public class SlotHolder : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public SLOT_TYPE slotType;
 
@@ -78,4 +78,23 @@ public class SlotHolder : MonoBehaviour, IPointerClickHandler
         itemUI.SetupItemUI(item.ItemData, item.Amount);
     }
 
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        //InventoryManager
+        if (itemUI.GetItem())
+        {
+            InventoryManager.Instance.tooltip.SetupTooltip(itemUI.GetItem());
+            InventoryManager.Instance.tooltip.gameObject.SetActive(true);
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        InventoryManager.Instance.tooltip.gameObject.SetActive(false);
+    }
+
+    private void OnDisable()
+    {
+        InventoryManager.Instance.tooltip.gameObject.SetActive(false);
+    }
 }

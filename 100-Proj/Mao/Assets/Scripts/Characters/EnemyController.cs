@@ -114,6 +114,12 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
             // FIXME 
             GameManager.Instance.RemoveObserver(this);
         }
+
+        // spawner loot
+        if (GetComponent<LootSpawner>() && _isDead)
+        {
+            GetComponent<LootSpawner>().Spawnloot();
+        }
     }
 
     private void Update()
