@@ -17,6 +17,8 @@ public class CharacterStat : MonoBehaviour
 
     private Combat_SO baseCombat;
 
+    private RuntimeAnimatorController baseAnimator;
+
     [Header("Weapon")]
     public Transform weaponSlot;
 
@@ -31,6 +33,8 @@ public class CharacterStat : MonoBehaviour
         }
 
         baseCombat = Instantiate(combat);
+
+        baseAnimator = GetComponent<Animator>().runtimeAnimatorController;
     }
 
     #region Read&Write From DATA_SO
@@ -318,9 +322,13 @@ public class CharacterStat : MonoBehaviour
         }
 
         combat.ApplyWeaponData(weapon.WeaponData);
-        // TODO: animation
 
         InventoryManager.Instance.UpdateStatsText(CurrentHealth, (int)(MinDamage), (int)MaxDamage);
+
+        if (weapon.weaponAnimator != null)
+        {
+            GetComponent<Animator>().runtimeAnimatorController = weapon.weaponAnimator;
+        }
     }
 
     //
@@ -336,7 +344,10 @@ public class CharacterStat : MonoBehaviour
 
         combat.ApplyWeaponData(baseCombat);
 
-        // TODO: animation
+        if (baseAnimator != null)
+        {
+            GetComponent<Animator>().runtimeAnimatorController = baseAnimator;
+        }
     }
 
     #endregion

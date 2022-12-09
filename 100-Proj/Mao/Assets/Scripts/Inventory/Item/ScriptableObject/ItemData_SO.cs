@@ -30,6 +30,9 @@ public class ItemData_SO : ScriptableObject
 
     public Combat_SO WeaponData;
 
+    public AnimatorOverrideController weaponAnimator;
+
     [Header("Userable Item")]
     public UseableItemData_SO useableData;
+
 }
