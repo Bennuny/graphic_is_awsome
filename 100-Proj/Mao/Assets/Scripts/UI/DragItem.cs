@@ -57,42 +57,44 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                     targetHolder = eventData.pointerEnter.gameObject.GetComponentInParent<SlotHolder>();
                 }
 
-
-                switch (targetHolder.slotType)
+                if (targetHolder != InventoryManager.Instance.currentDrag.originalHolder)
                 {
-                    case SLOT_TYPE.BAG:
-                        {
-                            SwapItem();
-                        }
-                        break;
-                    case SLOT_TYPE.WEAPON:
-                        {
-                            if (currentItemUI.Bag.items[currentItemUI.Index].ItemData.Type == ITEM_TYPE.WEAPON)
+                    switch (targetHolder.slotType)
+                    {
+                        case SLOT_TYPE.BAG:
                             {
                                 SwapItem();
                             }
-                        }
-                        break;
-                    case SLOT_TYPE.ARMOR:
-                        {
-                            if (currentItemUI.Bag.items[currentItemUI.Index].ItemData.Type == ITEM_TYPE.ARMOR)
+                            break;
+                        case SLOT_TYPE.WEAPON:
                             {
-                                SwapItem();
+                                if (currentItemUI.Bag.items[currentItemUI.Index].ItemData.Type == ITEM_TYPE.WEAPON)
+                                {
+                                    SwapItem();
+                                }
                             }
-                        }
-                        break;
-                    case SLOT_TYPE.ACTION:
-                        {
-                            if (currentItemUI.Bag.items[currentItemUI.Index].ItemData.Type == ITEM_TYPE.USEABLE)
+                            break;
+                        case SLOT_TYPE.ARMOR:
                             {
-                                SwapItem();
+                                if (currentItemUI.Bag.items[currentItemUI.Index].ItemData.Type == ITEM_TYPE.ARMOR)
+                                {
+                                    SwapItem();
+                                }
                             }
-                        }
-                        break;
-                }
+                            break;
+                        case SLOT_TYPE.ACTION:
+                            {
+                                if (currentItemUI.Bag.items[currentItemUI.Index].ItemData.Type == ITEM_TYPE.USEABLE)
+                                {
+                                    SwapItem();
+                                }
+                            }
+                            break;
+                    }
 
-                currentHolder.UpdateItem();
-                targetHolder.UpdateItem();
+                    currentHolder.UpdateItem();
+                    targetHolder.UpdateItem();
+                }
             }
         }
 

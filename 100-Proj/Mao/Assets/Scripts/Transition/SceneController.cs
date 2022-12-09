@@ -49,6 +49,7 @@ public class SceneController : Singleton<SceneController>, IEndGameObserver
     IEnumerator Transition(string sceneName, TransitionDestination.DestinationTag destinationTag)
     {
         SaveManager.Instance.SavePlayerData();
+        InventoryManager.Instance.SaveData();
 
 
         var activeSceneName = SceneManager.GetActiveScene().name;
@@ -112,8 +113,6 @@ public class SceneController : Singleton<SceneController>, IEndGameObserver
     {
         SceneFader fade = Instantiate(sceneFaderPrefab);
 
-
-
         if (sceneName != "")
         {
             yield return fade.StartCoroutine(fade.FadeOut(2.0f));
@@ -124,6 +123,7 @@ public class SceneController : Singleton<SceneController>, IEndGameObserver
 
             //
             SaveManager.Instance.SavePlayerData();
+            InventoryManager.Instance.SaveData();
 
             yield return fade.StartCoroutine(fade.FadeIn(2.0f));
 

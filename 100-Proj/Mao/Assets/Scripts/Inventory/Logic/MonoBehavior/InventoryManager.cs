@@ -14,6 +14,12 @@ public class InventoryManager : Singleton<InventoryManager>
 
     // TODO: 最后创建模板
     [Header("Inventory Data")]
+    public InventoryData_SO inventoryDataTemplate;
+
+    public InventoryData_SO actionDataTemplate;
+
+    public InventoryData_SO equipmentDataTemplate;
+
     public InventoryData_SO inventoryData;
 
     public InventoryData_SO actionData;
@@ -46,8 +52,31 @@ public class InventoryManager : Singleton<InventoryManager>
     [Header("Tooltip")]
     public ItemToolTips tooltip;
 
+    protected override void Awake()
+    {
+        base.Awake();
+
+
+        if (inventoryDataTemplate != null)
+        {
+            inventoryData = Instantiate(inventoryDataTemplate);
+        }
+
+        if (actionDataTemplate != null)
+        {
+            actionData = Instantiate(actionDataTemplate);
+        }
+
+        if (equipmentDataTemplate != null)
+        {
+            equipmentData = Instantiate(equipmentDataTemplate);
+        }
+    }
+
     private void Start()
     {
+        LoadData();
+
         inventoryUI.RefreshUI();
 
         actionUI.RefreshUI();
@@ -67,6 +96,22 @@ public class InventoryManager : Singleton<InventoryManager>
         var playerStat = GameManager.Instance.playerStats;
         UpdateStatsText(playerStat.MaxHealth, (int)playerStat.MinDamage, (int)playerStat.MaxDamage);
     }
+
+    public void SaveData()
+    {
+        SaveManager.Instance.Save(inventoryData, inventoryData.name);
+        SaveManager.Instance.Save(actionData, actionData.name);
+        SaveManager.Instance.Save(equipmentData, equipmentData.name);
+    }
+
+
+    public void LoadData()
+    {
+        SaveManager.Instance.Load(inventoryData, inventoryData.name);
+        SaveManager.Instance.Load(actionData, actionData.name);
+        SaveManager.Instance.Load(equipmentData, equipmentData.name);
+    }
+
 
     public void UpdateStatsText(int health, int combatMin, int combatMax)
     {
