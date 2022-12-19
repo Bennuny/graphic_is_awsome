@@ -12,7 +12,7 @@ public class GameManager : Singleton<GameManager>
     List<IEndGameObserver> _endGameObservers = new List<IEndGameObserver>();
 
 
-
+    // ! 如果是DontDestroyOnLoad的话，必须是Hierarchy窗口的物体，不能是子物体；
     protected override void Awake()
     {
         base.Awake();

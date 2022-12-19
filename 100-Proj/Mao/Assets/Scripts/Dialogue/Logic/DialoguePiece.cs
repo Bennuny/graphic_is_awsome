@@ -12,4 +12,7 @@ public class DialoguePiece
     public string Text;
 
     public List<DailogueOption> options = new List<DailogueOption>();
+
+    [Tooltip("任务数据")]
+    public QuestData_SO quest;
 }

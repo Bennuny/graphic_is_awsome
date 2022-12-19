@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 207ffa506cc7440f5bd3e6bbb9d5c854, type: 3}
   m_Name: New Talk
   m_EditorClassIdentifier: 
-  dialoguePieces: []
+  dialoguePieces:
+  - ID: 
+    Image: {fileID: 0}
+    Text: 
