@@ -28,4 +28,19 @@ public class QuestData_SO : ScriptableObject
 
 
     public List<QuestRequire> questRequires = new List<QuestRequire>();
+
+    public List<InventoryItem> rewards = new List<InventoryItem>();
+
+
+
+    public void GiveReward()
+    {
+        foreach (var reward in rewards)
+        {
+            if (reward.Amount < 0)
+            {
+                int requireCount = Mathf.Abs(reward.Amount);
+            }
+        }
+    }
 }

@@ -21,6 +21,28 @@ public class QuestManager : Singleton<QuestManager>
 
     public List<QuestTask> tasks = new List<QuestTask>();
 
+    public void LoadQuestManager()
+    {
+        var questCount = PlayerPrefs.GetInt("QuestCount");
+
+        for (int i = 0; i < questCount; i++)
+        {
+            var newQuest = ScriptableObject.CreateInstance<QuestData_SO>();
+
+            SaveManager.Instance.Load(newQuest, "task" + i);
+        }
+    }
+
+    public void SaveQuestManager()
+    {
+        PlayerPrefs.SetInt("QuestCount", tasks.Count);
+
+        for (int i = 0; i < tasks.Count; i++)
+        {
+            SaveManager.Instance.Save(tasks[i].questData, "task" + i);
+        }
+    }
+
 
     public bool HaveQuest(QuestData_SO data)
     {
@@ -35,6 +57,11 @@ public class QuestManager : Singleton<QuestManager>
     public QuestTask GetTask(QuestData_SO data)
     {
         return tasks.Find(q => q.questData.questName == data.questName);
+    }
+
+    public void CheckQuestProgress()
+    {
+        //var finish = tasks.Where(q => q.requ)
     }
 }
 

@@ -11,9 +11,19 @@ public class DialogueController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") & currentData != null)
+        if (other.CompareTag("Player") && currentData != null)
         {
             canTalk = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            //DialogueUI.setAction(false);
+            //
+            canTalk = false;
         }
     }
 

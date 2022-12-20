@@ -26,4 +26,13 @@ public class DialogueData_SO : ScriptableObject
         }
     }
 #endif
+
+
+    public QuestData_SO GetQuest()
+    {
+        QuestData_SO currentQuest = null;
+
+
+        return currentQuest;
+    }
 }

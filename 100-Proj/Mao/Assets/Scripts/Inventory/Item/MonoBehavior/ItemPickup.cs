@@ -18,6 +18,8 @@ public class ItemPickup : MonoBehaviour
             // equip weapon
             // GameManager.Instance.playerStats.EquipWeapon(itemData);
 
+            //QuestManager.Instance.UpdateQuestProgress(itemData.Name, itemData.Amount);
+
             Destroy(gameObject);
         }
     }
